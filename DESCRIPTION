@@ -1,0 +1,42 @@
+Package: fmdates
+Type: Package
+Title: Financial Market Date Calculations
+Version: 0.1.0
+Author: Imanuel Costigan <i.costigan@me.com>
+Maintainer: Imanuel Costigan <i.costigan@me.com>
+Description: Implements common date calculations relevant for specifying
+    the economic nature of financial market contracts and typically defined in
+    ISDA legal documentation.
+License: GPL-2
+Encoding: UTF-8
+LazyData: true
+Imports:
+    lubridate,
+    assertthat,
+    methods,
+    utils,
+    stats
+RoxygenNote: 5.0.1
+Suggests:
+    testthat,
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
+Collate:
+    'date-methods.R'
+    'date-calendar-classes.R'
+    'date-calendar-au-classes.R'
+    'date-calendar-ch-classes.R'
+    'date-calendar-eu-classes.R'
+    'date-calendar-gb-classes.R'
+    'date-calendar-hk-classes.R'
+    'date-calendar-joint-classes.R'
+    'date-calendar-jp-classes.R'
+    'date-calendar-no-classes.R'
+    'date-calendar-nz-classes.R'
+    'date-calendar-us-classes.R'
+    'date-counters.R'
+    'date-epochs.R'
+    'date-schedule.R'
+    'fmdates-package.r'
+    'utils.R'
