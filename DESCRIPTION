@@ -15,7 +15,9 @@ Imports:
     assertthat,
     methods,
     utils,
-    stats
+    stats,
+    R6,
+    magrittr
 RoxygenNote: 5.0.1
 Suggests:
     testthat,

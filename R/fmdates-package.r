@@ -6,4 +6,6 @@
 #'
 #' @name fmdates
 #' @docType package
+#' @importFrom methods is
+#' @importFrom magrittr %>%
 NULL
