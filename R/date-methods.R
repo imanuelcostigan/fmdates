@@ -178,12 +178,10 @@ to_wday <- function (wday) {
 }
 
 quarter_end <- function (dates) {
-  QE_MONTHS <- rep(c(3, 6, 9, 12), each = 3) %>% stats::setNames(1:12)
-  qe_months <- QE_MONTHS[lubridate::month(dates)] %>% as.numeric()
+  QE_MONTHS <- stats::setNames(rep(c(3, 6, 9, 12), each = 3), 1:12)
+  qe_months <- as.numeric(QE_MONTHS[lubridate::month(dates)])
   lubridate::month(dates) <- qe_months
-  paste(lubridate::year(dates), qe_months, "01", sep = "-") %>%
-    as.Date() %>%
-    eom()
+  eom(as.Date(paste(lubridate::year(dates), qe_months, "01", sep = "-")))
 }
 
 futures_settlement <- function (date, serial, nth, nday, offset = 0,
@@ -197,7 +195,7 @@ futures_settlement <- function (date, serial, nth, nday, offset = 0,
     !xor(!is.null(post_offset), lubridate::is.period(post_offset)),
     !xor(!is.null(post_offset_calendar), is(post_offset_calendar, "Calendar"))
   )
-  s1_start <- (date %>% quarter_end() %>% lubridate::floor_date("month")) +
+  s1_start <- lubridate::floor_date(quarter_end(date), "month") +
     lubridate::days(offset)
   guess_first_settlement <- nth_nday(s1_start, nth, nday)
   if (!is.null(post_offset)) {
