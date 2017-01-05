@@ -5,22 +5,20 @@
 \title{Generate a date schedule}
 \usage{
 generate_schedule(effective_date, termination_date, tenor,
-  calendar = Calendar$new(), bdc = "u", stub = "short_front",
+  calendar = EmptyCalendar(), bdc = "u", stub = "short_front",
   eom_rule = FALSE, first_date = effective_date,
   last_date = termination_date)
 }
 \arguments{
-\item{effective_date}{the date at which the schedule begins. For
-example, the effective date of a swap. This should be
-\code{\link{POSIXct}}.}
+\item{effective_date}{the date at which the schedule begins. For example, the
+effective date of a swap. This should be \code{\link{POSIXct}}.}
 
-\item{termination_date}{the date at which the schedule ends. For
-example, the termination date of a swap. This should be
-\code{\link{POSIXct}}.}
+\item{termination_date}{the date at which the schedule ends. For example, the
+termination date of a swap. This should be \code{\link{POSIXct}}.}
 
-\item{tenor}{the frequency of the events for which dates are
-generated. For example, \code{month(3)} reflects events that occur quarterly.
-Should be an atomic \code{\link{Period-class}} of length one}
+\item{tenor}{the frequency of the events for which dates are generated. For
+example, \code{month(3)} reflects events that occur quarterly. Should be an
+atomic \code{\link{Period-class}} of length one}
 
 \item{calendar}{a \code{\link{Calendar}}}
 
@@ -57,7 +55,7 @@ termination_date <- ymd('20121203')
 tenor <- months(3)
 stub <- 'short_front'
 bdc <- 'mf'
-calendar <- AUSYCalendar$new()
+calendar <- AUSYCalendar()
 eom_rule <- FALSE
 generate_schedule(effective_date, termination_date, tenor, calendar,
  bdc, stub, eom_rule)
