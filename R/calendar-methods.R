@@ -1,15 +1,41 @@
 # Generics ----------------------------------------------------------------
 
+#' Good date checker
+#'
+#' Checks whether dates are business days (good days) in a given locale
+#' represented by a `Calendar`.
+#'
+#' An `is_good` method must be written for each calendar. The default method
+#' returns `TRUE` for all dates. Methods have been implemented for each of the
+#' calendars inheriting from the `Calendar` class - see the method's code for
+#' more details. The method implemented for the `JointCalendar` class checks
+#' whether the supplied dates are good in each or any of the locales represented
+#' by the joint calendar depending on the rule specified by the joint calendar.
+#'
+#' @param dates a vector of dates
+#' @param calendar an object inheriting from either [Calendar] or
+#'   [JointCalendar]. Dispatch to methods occurs on this argument.
+#' @return a logical vector with `TRUE` if the date is good and `FALSE` if the
+#'   date is bad
+#' @examples
+#' is_good(lubridate::ymd(20160126, 20160411), AUSYCalendar())
+#' is_good(lubridate::ymd(20160126), USNYCalendar())
+#' @export
+#' @family calendar methods
+#' @seealso Calendar
 
-is_good <- function(dates, calendar, ...) UseMethod("is_good", calendar)
+is_good <- function(dates, calendar) UseMethod("is_good", calendar)
+
 locale <- function(x, ...) UseMethod("locale")
 
 # Methods -----------------------------------------------------------------
 
+#' @export
 is_good.default <- function(dates, calendar) {
   rep_len(TRUE, NROW(dates))
 }
 
+#' @export
 is_good.AUSYCalendar <- function(dates, calendar) {
   # Gather holidays generally observed across Australia
   # http://en.wikipedia.org/wiki/Public_holidays_in_Australia
@@ -45,6 +71,7 @@ is_good.AUSYCalendar <- function(dates, calendar) {
           a$m == 12))
 }
 
+#' @export
 is_good.AUMECalendar <- function(dates, calendar) {
   # Gather holidays generally observed across Australia
   # http://en.wikipedia.org/wiki/Public_holidays_in_Australia
@@ -80,6 +107,7 @@ is_good.AUMECalendar <- function(dates, calendar) {
           a$m == 12))
 }
 
+#' @export
 is_good.CHZHCalendar <- function(dates, calendar) {
   a <- extract_atoms(dates, calendar)
   # Weekends
@@ -102,6 +130,7 @@ is_good.CHZHCalendar <- function(dates, calendar) {
       (a$dom >= 24 & a$dom <= 26) & a$m == 12)
 }
 
+#' @export
 is_good.EUTACalendar <- function(dates, calendar) {
   assertthat::assert_that(all(lubridate::year(dates) > 1998))
   a <- extract_atoms(dates, calendar)
@@ -128,6 +157,7 @@ is_good.EUTACalendar <- function(dates, calendar) {
       (a$dom == 31 & a$m == 12 & (a$y == 1999 | a$y == 2001)))
 }
 
+#' @export
 is_good.GBLOCalendar <- function(dates, calendar) {
   a <- extract_atoms(dates, calendar)
   # http://en.wikipedia.org/wiki/Public_holidays_in_the_United_Kingdom
@@ -166,6 +196,7 @@ is_good.GBLOCalendar <- function(dates, calendar) {
       a$dom == 29 & a$m == 4 & a$y == 2011)
 }
 
+#' @export
 is_good.HKHKCalendar <- function(dates, calendar) {
   # http://www.gov.hk/en/about/abouthk/holiday/
   # https://en.wikipedia.org/w/index.php?title=Public_holidays_in_Hong_Kong&oldid=703958274
@@ -225,6 +256,7 @@ is_good.HKHKCalendar <- function(dates, calendar) {
           a$m == 12))
 }
 
+#' @export
 is_good.JPTOCalendar <- function(dates, calendar) {
   # http://en.wikipedia.org/wiki/Public_holidays_in_Japan
   a <- extract_atoms(dates, calendar)
@@ -276,6 +308,7 @@ is_good.JPTOCalendar <- function(dates, calendar) {
       a$dom == 31 & a$m == 12)
 }
 
+#' @export
 is_good.NOOSCalendar <- function(dates, calendar) {
   a <- extract_atoms(dates, calendar)
   !(a$wd == 1 | a$wd == 7 | # Weekends
@@ -297,6 +330,7 @@ is_good.NOOSCalendar <- function(dates, calendar) {
       (a$dom == 25 | a$dom == 26) & a$m == 12)
 }
 
+#' @export
 is_good.NZAUCalendar <- function(dates, calendar) {
   a <- extract_atoms(dates, calendar)
   !(a$wd == 1 | a$wd == 7 | # Weekends
@@ -326,6 +360,7 @@ is_good.NZAUCalendar <- function(dates, calendar) {
       ((a$dom >= 26 & a$m == 1) | (a$dom <= 1 & a$m == 2)) & a$dow == 'Mon')
 }
 
+#' @export
 is_good.NZWECalendar <- function(dates, calendar) {
   a <- extract_atoms(dates, calendar)
   !(a$wd == 1 | a$wd == 7 | # Weekends
@@ -356,6 +391,7 @@ is_good.NZWECalendar <- function(dates, calendar) {
 }
 
 
+#' @export
 is_good.USNYCalendar <- function(dates, calendar) {
   a <- extract_atoms(dates, calendar)
   # http://en.wikipedia.org/wiki/New_York_State_government_holidays
@@ -384,6 +420,7 @@ is_good.USNYCalendar <- function(dates, calendar) {
           (a$dom == 24 & a$dow == 'Fri')) & a$m == 12))
 }
 
+#' @export
 is_good.JointCalendar <- function(dates, calendar) {
   m <- NROW(dates)
   n <- NROW(calendar$calendars)
@@ -400,6 +437,8 @@ tz.Calendar <- function(x) {
   x$tz
 }
 
+#' @importFrom lubridate tz
+#' @export
 tz.JointCalendar <- function(x) {
   x$tzs
 }
@@ -412,9 +451,12 @@ locale.JointCalendar <- function(x, ...) {
   x$locales
 }
 
+#' @export
 length.Calendar <- function(x) 1L
+#' @export
 length.JointCalendar <- function(x) length(x$calendars)
 
+#' @export
 c.Calendar <- function (..., recursive = FALSE) {
   calendars <- list(...)
   clengths <- sum(vapply(calendars, length, integer(1)))
@@ -434,6 +476,7 @@ c.Calendar <- function (..., recursive = FALSE) {
   JointCalendar(res, all)
 }
 
+#' @export
 c.JointCalendar <- function(..., recursive = FALSE) {
   calendars <- list(...)
   clengths <- sum(vapply(calendars, length, integer(1)))
@@ -453,6 +496,7 @@ c.JointCalendar <- function(..., recursive = FALSE) {
   JointCalendar(res, all)
 }
 
+#' @export
 `[.JointCalendar` <- function (x, i) {
   assertthat::assert_that(assertthat::is.number(i))
   if (i <= length(x)) {
@@ -460,10 +504,12 @@ c.JointCalendar <- function(..., recursive = FALSE) {
   } else NA
 }
 
+#' @export
 print.Calendar <- function(x, ...) {
   cat(paste0("<", x$locale, "> TZ:"), x$tz, "\n"); invisible(x)
 }
 
+#' @export
 print.JointCalendar <- function(x, ...) {
   rule <- if (identical(x$rule, all)) "all" else "any"
   cat("<JointCalendar>", paste0(x$locales, collapse=", "), "\n")
