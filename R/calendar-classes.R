@@ -33,28 +33,40 @@ Calendar <- function(locale, tz) {
 }
 
 #' @rdname Calendar
+#' @export
 EmptyCalendar <- Calendar(NA, NA)
 #' @rdname Calendar
+#' @export
 AUSYCalendar <- Calendar("AUSY", "Australia/Sydney")
 #' @rdname Calendar
+#' @export
 AUMECalendar <- Calendar("AUME", "Australia/Melbourne")
 #' @rdname Calendar
+#' @export
 CHZHCalendar <- Calendar("CHZH", "Europe/Zurich")
 #' @rdname Calendar
+#' @export
 EUTACalendar <- Calendar("EUTA", "Europe/Brussels")
 #' @rdname Calendar
+#' @export
 GBLOCalendar <- Calendar("GBLO", "Europe/London")
 #' @rdname Calendar
+#' @export
 HKHKCalendar <- Calendar("HKHK", "Asia/Hong_Kong")
 #' @rdname Calendar
+#' @export
 JPTOCalendar <- Calendar("JPTO", "Asia/Tokyo")
 #' @rdname Calendar
+#' @export
 NOOSCalendar <- Calendar("NOOS", "Europe/Oslo")
 #' @rdname Calendar
+#' @export
 NZAUCalendar <- Calendar("NZAU", "Pacific/Auckland")
 #' @rdname Calendar
+#' @export
 NZWECalendar <- Calendar("NZWE", "Pacific/Auckland")
 #' @rdname Calendar
+#' @export
 USNYCalendar <- Calendar("USNY", "America/New_York")
 
 
