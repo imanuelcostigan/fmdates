@@ -1,6 +1,6 @@
 context('Epochs')
 
-library(lubridate)
+suppressPackageStartupMessages(library(lubridate))
 
 test_that('Easter Monday calculations work:', {
   expect_identical(easter_monday(c(1963, 2013)), yday(ymd(19630415, 20130401)))

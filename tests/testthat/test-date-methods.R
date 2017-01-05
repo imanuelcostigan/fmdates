@@ -1,6 +1,6 @@
 context("Methods")
 
-library(lubridate)
+suppressPackageStartupMessages(library(lubridate))
 
 test_that("is_eom works as expected", {
   expect_identical(is_eom(ymd("2011-02-28")), TRUE)

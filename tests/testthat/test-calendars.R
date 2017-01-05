@@ -1,6 +1,6 @@
-context("Holidays")
+context("Calendars")
 
-library("lubridate")
+suppressPackageStartupMessages(library("lubridate"))
 
 test_that('Sydney calendar is correct', {
   # Source: http://www.industrialrelations.nsw.gov.au/oirwww/NSW_public_holidays/NSW_Public_Holidays_2013-2015.page
