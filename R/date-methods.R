@@ -1,3 +1,25 @@
+#' Adjust to good dates
+#'
+#' One common financial markets date arithmetic requires a date needs to be
+#' rolled to a business day following some convention (see [is_valid_bdc()] for
+#' further details). Such rolled dates can be determined by calling `adjust()`.
+#'
+#' @param dates a vector of dates to adjust.
+#' @param bdc the business day convention used to roll the `dates` if necessary
+#' @param calendar an object that inherits from [`Calendar`] or [`JointCalendar`]
+#' which is used to determine the goodness of `dates`
+#' @return a vector of adjusted dates - good days are unadjusted
+#' @examples
+#' ausy <- AUSYCalendar()
+#' adjust(lubridate::ymd("20120102"), "u", ausy)
+#' adjust(lubridate::ymd("20120102"), "f", ausy)
+#' adjust(lubridate::ymd("20120102"), "mf", ausy)
+#' adjust(lubridate::ymd("20120102"), "p", ausy)
+#' adjust(lubridate::ymd("20120102"), "mp", ausy)
+#' adjust(lubridate::ymd("20120102"), "ms", ausy)
+#' @export
+#' @family calendar methods
+
 adjust <- function(dates, bdc, calendar) {
   assertthat::assert_that(is_valid_bdc(bdc), assertthat::is.scalar(bdc))
   if (identical(bdc, "u")) return (dates)

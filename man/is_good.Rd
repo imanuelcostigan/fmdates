@@ -34,4 +34,6 @@ is_good(lubridate::ymd(20160126), USNYCalendar())
 }
 \seealso{
 Calendar
+
+Other calendar methods: \code{\link{adjust}}
 }
