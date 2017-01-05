@@ -24,9 +24,9 @@ years consist of 360 calendar days.
 The day count is determined after making the following (ordered)
 modifications:
 \enumerate{
-  \item If the start date is the 31st, set the start dates to the 30th.
-  \item If the start date greater than the 29nd and the end date is the
-        31st then set the end dates to the 30th.
+\item If the start date is the 31st, set the start dates to the 30th.
+\item If the start date greater than the 29nd and the end date is the
+31st then set the end dates to the 30th.
 }
 
 The year fraction is then calculated as:
@@ -40,4 +40,3 @@ the result will be negative.
 
 This is also known as the bond basis.
 }
-

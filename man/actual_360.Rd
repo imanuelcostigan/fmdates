@@ -29,4 +29,3 @@ The order of \code{date1} and \code{date2} is not important. If \code{date1}
 is less than \code{date2} then the result will be non-negative. Otherwise,
 the result will be negative.
 }
-

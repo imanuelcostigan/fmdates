@@ -19,4 +19,3 @@ The \code{dates} are rounded to the end of their respective months.
 library("lubridate")
 eom(ymd(20120203, 20140203))
 }
-

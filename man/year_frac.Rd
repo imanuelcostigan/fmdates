@@ -48,8 +48,7 @@ year_frac(ymd("2010-02-28"), ymd("2012-03-31"), "act/actisda")  # 2.086998
 }
 \seealso{
 \code{\link{thirty_360}}, \code{\link{thirty_360_us}},
-  \code{\link{thirty_360_eu}}, \code{\link{thirty_360_eu_isda}},
-  \code{\link{thirty_360_eu_plus}}, \code{\link{actual_360}},
-  \code{\link{actual_365}}, \code{\link{actual_actual_isda}}.
+\code{\link{thirty_360_eu}}, \code{\link{thirty_360_eu_isda}},
+\code{\link{thirty_360_eu_plus}}, \code{\link{actual_360}},
+\code{\link{actual_365}}, \code{\link{actual_actual_isda}}.
 }
-

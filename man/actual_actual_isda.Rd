@@ -29,18 +29,17 @@ whether the year is a leap year or not. The year fraction is calculated as:
 where:
 
 \itemize{
-  \item \eqn{d_1} is the remaining days in the first date's year including
-        both the start and end date
-  \item \eqn{d_2} is the number of days to the second date from the start
-        of that year
-  \item \eqn{{dy}_1} is 366 if the first date is in a leap year. Otherwise
-        it is 365
-  \item \eqn{{dy}_2} is 366 if the second date is in a leap year. Otherwise
-        it is 365
+\item \eqn{d_1} is the remaining days in the first date's year including
+both the start and end date
+\item \eqn{d_2} is the number of days to the second date from the start
+of that year
+\item \eqn{{dy}_1} is 366 if the first date is in a leap year. Otherwise
+it is 365
+\item \eqn{{dy}_2} is 366 if the second date is in a leap year. Otherwise
+it is 365
 }
 
 The order of \code{date1} and \code{date2} is not important. If \code{date1}
 is less than \code{date2} then the result will be non-negative. Otherwise,
 the result will be negative.
 }
-

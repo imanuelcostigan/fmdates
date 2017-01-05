@@ -62,4 +62,3 @@ eom_rule <- FALSE
 generate_schedule(effective_date, termination_date, tenor, calendar,
  bdc, stub, eom_rule)
 }
-
