@@ -1,3 +1,115 @@
+adjust <- function(dates, bdc, calendar) {
+  assertthat::assert_that(is_valid_bdc(bdc), assertthat::is.scalar(bdc))
+  if (identical(bdc, "u")) return (dates)
+
+  # Setup
+  is_preceding <- grepl("p$", bdc)
+  direction <- +1 * (!is_preceding) - 1 * is_preceding
+  is_modified <- grepl("^m", bdc)
+
+  # Helper functions. Compacts the code below
+  is_over_month_end <- function(d1, d2) {
+    lubridate::month(d1) != lubridate::month(d2)
+  }
+  is_over_mid_month <- function(d1, d2) {
+    is_early <- lubridate::mday(d1) <= 15
+    is_early_and_over <- is_early & lubridate::mday(d2) > 15
+    is_late_and_over <- !is_early & is_over_month_end(d1, d2)
+    is_early_and_over | is_late_and_over
+  }
+  if (identical(bdc, "ms")) {
+    is_over_barrier <- is_over_mid_month
+  } else {
+    is_over_barrier <- is_over_month_end
+  }
+  adjuster <- function(direction, is_over_barrier) {
+    function(dates, is_modified) {
+      dts <- dates
+      to_adjust <- !is_good(dts, calendar)
+      while (any(to_adjust)) {
+        dts <- dts + to_adjust * lubridate::days(direction * 1)
+        to_adjust <- !is_good(dts, calendar)
+      }
+      to_modify <- is_over_barrier(dates, dts)
+      if (is_modified & any(to_modify)) {
+        reverse_adjuster = adjuster(-direction, is_over_month_end)
+        dts[to_modify] <- reverse_adjuster(dates[to_modify], FALSE)
+      }
+      dts
+    }
+  }
+
+  # Adjustments
+  fn <- adjuster(direction, is_over_barrier)
+  fn(dates, is_modified)
+}
+
+shift <- function(dates, period, bdc = "u", calendar = EmptyCalendar(),
+  eom_rule = TRUE) {
+  # Period should have length one (but might have multiple period types
+  # in this)
+  assertthat::assert_that(assertthat::is.scalar(period))
+
+  # Figure out which period types to loop
+  ps <- methods::slotNames(period)
+  # .shift only supports day, month and year slots
+  ps_to_be_looped <- ps %in% c("day", "month", "year")
+  is_non_zero_p <- Map(methods::slot, period,
+    methods::slotNames(period)) != 0
+  is_p_looped <- is_non_zero_p & ps_to_be_looped
+  is_p_ignored<- is_non_zero_p & !ps_to_be_looped
+
+  if (any(is_p_ignored)) {
+    message("The following period values are not supported by shift and ",
+      "are ignored: ", paste0(ps[is_p_ignored], collapse = ', '))
+  }
+
+  if (!any(is_p_looped)) {
+    # Shift dates by 0 periods (i.e. adjust to good days and exit thanks)
+    return(adjust(dates, bdc, calendar))
+  } else {
+    res <- dates
+    for (p in ps[is_p_looped]) {
+      recast_p <- lubridate::period(methods::slot(period, p), p)
+      res <- shift_single(res, recast_p, bdc, calendar, eom_rule)
+    }
+  }
+  return(res)
+}
+
+shift_single = function (dates, period, bdc, calendar, eom_rule) {
+  # Day shift
+  if (identical(period_type(period), "day")) {
+    # Setup temp and counter variables
+    i <- rep(0, NROW(dates))
+    shift_length <- period_length(period)
+    sgn <- sign(shift_length)
+
+    # Step through days to get to shift_length good days for each date
+    is_not_done <- abs(i) < abs(shift_length)
+    while (any(is_not_done)) {
+      dates[is_not_done] <- dates[is_not_done] + sgn * lubridate::days(1)
+      to_roll <- is_good(dates, calendar)
+      i[to_roll] <- i[to_roll] + sgn * 1
+      is_not_done <- abs(i) < abs(shift_length)
+    }
+    return(dates)
+  }
+  # Month and year shifts are treated the same: one year = twelve months
+  # Given assertions at the start, these should be the only options left
+  res <- lubridate::`%m+%`(dates, period)
+  if (!eom_rule) {
+    return(adjust(res, bdc, calendar))
+  } else {
+    are_last_good_days <- identical(dates, adjust(eom(dates), "p", calendar))
+    are_less_31_days <- lubridate::mday(dates) <= 30
+    eom_applies <- are_last_good_days & are_less_31_days
+    if (any(eom_applies))
+      res[eom_applies] <- adjust(eom(res[eom_applies]), "p", calendar)
+    return(res)
+  }
+}
+
 #' Checks whether dates are last day of month
 #'
 #' This checks whether the \code{dates} provided are the last day of a
