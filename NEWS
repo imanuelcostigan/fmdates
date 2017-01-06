@@ -1,0 +1,8 @@
+Changes in version 0.1
+
+- Initial release
+- Introduces `Calendar` classes (S3) and associated convenience constructors for
+key locales
+- Introduces `is_good()`, `adjust()`, `shift()` and  `generate_schedule()` as
+key calendar related methods
+- Introduces `year_frac()` function for time length calculations.
