@@ -338,7 +338,7 @@ actual_365 <- function (date1, date2) {
 
 actual_actual_isda <- function (date1, date2)
 {
-  as.numeric(as.Date(date2) - as.Date(date1)) / 365
+  assertthat::assert_that(is(date1, "Date"), is(date1, "Date"))
   dib1 <- vector("numeric", NROW(date1))
   dib2 <- vector("numeric", NROW(date2))
 
