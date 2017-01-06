@@ -15,9 +15,6 @@ Imports:
     assertthat,
     methods,
     utils,
-    stats,
-    R6,
-    magrittr,
     stats
 RoxygenNote: 5.0.1.9000
 Roxygen: list(markdown = TRUE)
