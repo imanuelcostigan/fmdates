@@ -89,8 +89,7 @@ USNYCalendar <- Calendar("USNY", "America/New_York")
 #' @export
 #' @family calendar classes
 JointCalendar <- function(calendars, rule = all) {
-  assertthat::assert_that(is_list_of(calendars, "Calendar"),
-    rule == all || rule == any)
+  assertthat::assert_that(is_list_of(calendars, "Calendar"))
   locales <- vapply(calendars, locale, "character")
   is_duplicated <- duplicated(locales)
   locales <- locales[!is_duplicated]
