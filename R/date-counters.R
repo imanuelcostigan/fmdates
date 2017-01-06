@@ -398,8 +398,8 @@ year_frac <- function(date1, date2, day_basis, maturity_date = NULL)
   assertthat::assert_that(is_valid_day_basis(day_basis))
 
   # Convert inputs to Date (time stamp details irrelevant to these calcs)
-  date1 <- as.Date(date1, tz = lubridate::tz(date1))
-  date2 <- as.Date(date2, tz = lubridate::tz(date2))
+  date1 <- lubridate::as_date(date1)
+  date2 <- lubridate::as_date(date2)
 
   # Make sure inputs are vectors of same length. This will allow us to
   # vectorise the calculation
