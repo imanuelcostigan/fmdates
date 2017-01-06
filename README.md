@@ -79,3 +79,5 @@ year_frac(ymd("2010-03-31"), ymd("2012-03-31"), "30/360us")
 year_frac(ymd("2010-02-28"), ymd("2012-03-31"), "act/365")
 #> [1] 2.087671
 ```
+
+More details can be found in the associated help files and the vignette (`vignette("dates", "fmdates")`)
