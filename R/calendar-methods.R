@@ -557,6 +557,7 @@ print.JointCalendar <- function(x, ...) {
 #' @return `TRUE` if `x` inherits from `Calendar` or `JointCalendar`
 #'   (`is.Calendar` and `is.JointCalendar` respectively) and `FALSE` otherwise.
 #' @name is
+#' @family calendar methods
 #' @export
 is.Calendar <- function(x) inherits(x, "Calendar")
 

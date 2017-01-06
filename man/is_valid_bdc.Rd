@@ -41,7 +41,7 @@ business day.
 \seealso{
 Other calendar methods: \code{\link{adjust}},
   \code{\link{generate_schedule}}, \code{\link{is_good}},
-  \code{\link{locale}}, \code{\link{shift}},
-  \code{\link{tz}}
+  \code{\link{is}}, \code{\link{locale}},
+  \code{\link{shift}}, \code{\link{tz}}
 }
 \keyword{internal}

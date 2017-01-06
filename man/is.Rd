@@ -20,3 +20,9 @@ is.JointCalendar(x)
 \description{
 Calendar class checkers
 }
+\seealso{
+Other calendar methods: \code{\link{adjust}},
+  \code{\link{generate_schedule}}, \code{\link{is_good}},
+  \code{\link{is_valid_bdc}}, \code{\link{locale}},
+  \code{\link{shift}}, \code{\link{tz}}
+}

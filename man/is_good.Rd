@@ -37,6 +37,7 @@ Calendar
 
 Other calendar methods: \code{\link{adjust}},
   \code{\link{generate_schedule}},
-  \code{\link{is_valid_bdc}}, \code{\link{locale}},
-  \code{\link{shift}}, \code{\link{tz}}
+  \code{\link{is_valid_bdc}}, \code{\link{is}},
+  \code{\link{locale}}, \code{\link{shift}},
+  \code{\link{tz}}
 }

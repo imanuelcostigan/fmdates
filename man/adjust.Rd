@@ -35,6 +35,6 @@ adjust(lubridate::ymd("20120102"), "ms", ausy)
 \seealso{
 Other calendar methods: \code{\link{generate_schedule}},
   \code{\link{is_good}}, \code{\link{is_valid_bdc}},
-  \code{\link{locale}}, \code{\link{shift}},
-  \code{\link{tz}}
+  \code{\link{is}}, \code{\link{locale}},
+  \code{\link{shift}}, \code{\link{tz}}
 }

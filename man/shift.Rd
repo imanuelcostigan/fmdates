@@ -44,6 +44,6 @@ shift(ymd("20120229"), months(1), "u", ausy, TRUE)
 \seealso{
 Other calendar methods: \code{\link{adjust}},
   \code{\link{generate_schedule}}, \code{\link{is_good}},
-  \code{\link{is_valid_bdc}}, \code{\link{locale}},
-  \code{\link{tz}}
+  \code{\link{is_valid_bdc}}, \code{\link{is}},
+  \code{\link{locale}}, \code{\link{tz}}
 }
