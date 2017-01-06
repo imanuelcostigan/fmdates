@@ -19,8 +19,9 @@ a vector of adjusted dates - good days are unadjusted
 }
 \description{
 One common financial markets date arithmetic requires a date needs to be
-rolled to a business day following some convention (see \code{\link[=is_valid_bdc]{is_valid_bdc()}} for
-further details). Such rolled dates can be determined by calling \code{adjust()}.
+rolled to the closest business day following some convention (see
+\code{\link[=is_valid_bdc]{is_valid_bdc()}} for further details). Such rolled dates can be determined by
+calling \code{adjust()}.
 }
 \examples{
 ausy <- AUSYCalendar()
@@ -32,5 +33,6 @@ adjust(lubridate::ymd("20120102"), "mp", ausy)
 adjust(lubridate::ymd("20120102"), "ms", ausy)
 }
 \seealso{
-Other calendar methods: \code{\link{is_good}}
+Other calendar methods: \code{\link{is_good}},
+  \code{\link{shift}}
 }

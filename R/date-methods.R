@@ -1,8 +1,9 @@
 #' Adjust to good dates
 #'
 #' One common financial markets date arithmetic requires a date needs to be
-#' rolled to a business day following some convention (see [is_valid_bdc()] for
-#' further details). Such rolled dates can be determined by calling `adjust()`.
+#' rolled to the closest business day following some convention (see
+#' [is_valid_bdc()] for further details). Such rolled dates can be determined by
+#' calling `adjust()`.
 #'
 #' @param dates a vector of dates to adjust.
 #' @param bdc the business day convention used to roll the `dates` if necessary
@@ -65,6 +66,35 @@ adjust <- function(dates, bdc, calendar) {
   fn <- adjuster(direction, is_over_barrier)
   fn(dates, is_modified)
 }
+
+#' Shifting dates to good dates
+#'
+#' The [adjust()] function rolls dates to the closest good dates. This function
+#' shifts dates by a given [period][lubridate::period()] and adjusting the
+#' resulting dates to a closest good dates following the given business day
+#' convention.
+#'
+#' @param dates a vector of dates to shift and adjust
+#' @param period an atomic instance of the [period
+#'   class][`lubridate::Period-class`] in the sense that only one of its slots
+#'   should be non-zero. It must also only be a day, month or year period type.
+#' @param bdc the business day convention used to roll the `dates` if necessary
+#'   (default: "u" - unadjusted)
+#' @param calendar an object that inherits from [`Calendar`] or
+#'   [`JointCalendar`] which is used to determine the goodness of `dates`
+#'   (default: `EmptyCalendar()`)
+#' @param eom_rule if one of the `dates` is the last business day of the month,
+#'   is being shifted by a month or year `period` and `eom_rule` is `TRUE` then
+#'   the shifted date is also the last business day of the month
+#'   (default: `TRUE`)
+#' @return a vector of shifted dates
+#' @examples
+#' library(lubridate)
+#' ausy <- AUSYCalendar()
+#' shift(ymd("20120229"), months(1), "u", ausy, FALSE)
+#' shift(ymd("20120229"), months(1), "u", ausy, TRUE)
+#' @export
+#' @family calendar methods
 
 shift <- function(dates, period, bdc = "u", calendar = EmptyCalendar(),
   eom_rule = TRUE) {
