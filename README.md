@@ -3,6 +3,8 @@
 fmdates
 =======
 
+[![Travis build status](https://travis-ci.org/imanuelcostigan/fmdates.svg?branch=master)](https://travis-ci.org/imanuelcostigan/fmdates) [![Appveyor build status](https://ci.appveyor.com/api/projects/status/i8io32eoft5rsb6n/branch/master?svg=true)](https://ci.appveyor.com/project/imanuelcostigan/fmdates/branch/master)
+
 Motivation
 ----------
 
