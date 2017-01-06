@@ -15,3 +15,4 @@ a POSIXct vector of Gregorian dates at midnight UTC time.
 \description{
 Determine Gregorian date from Julian day
 }
+\keyword{internal}

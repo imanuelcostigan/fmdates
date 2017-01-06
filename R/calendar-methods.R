@@ -608,6 +608,8 @@ extract_atoms <- function (dates, calendar) {
 #' @return a flag (\code{TRUE} or \code{FALSE}) if all the supplied business
 #' day conventions are supported.
 #' @aliases businessdayconventions
+#' @family calendar methods
+#' @keywords internal
 
 is_valid_bdc <- function (bdc) {
   all(bdc %in% c('u', 'f', 'mf', 'p', 'mp', 'ms'))

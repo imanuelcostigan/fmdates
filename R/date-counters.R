@@ -27,6 +27,7 @@
 #' @param date2 A date-time object.
 #' @return A numeric value representing the number of years between
 #' \code{date1} and \code{date2}.
+#' @keywords internal
 
 thirty_360 <- function (date1, date2) {
   if (identical(date1, date2)) return (0)
@@ -79,6 +80,7 @@ thirty_360 <- function (date1, date2) {
 #' @param date2 A date-time object.
 #' @return A numeric value representing the number of years between
 #' \code{date1} and \code{date2}.
+#' @keywords internal
 
 thirty_360_us <- function (date1, date2)
 {
@@ -132,6 +134,7 @@ thirty_360_us <- function (date1, date2)
 #' @param date2 A date-time object
 #' @return a numeric value representing the number of years between
 #' \code{date1} and \code{date2}.
+#' @keywords internal
 
 thirty_360_eu <- function (date1, date2)
 {
@@ -179,6 +182,7 @@ thirty_360_eu <- function (date1, date2)
 #' @param maturity_date the maturity date of the instrument
 #' @return a numeric value representing the number of years between
 #' \code{date1} and \code{date2}.
+#' @keywords internal
 
 thirty_360_eu_isda <- function (date1, date2, maturity_date)
 {
@@ -225,6 +229,7 @@ thirty_360_eu_isda <- function (date1, date2, maturity_date)
 #' @param date2 A date-time object
 #' @return a numeric value representing the number of years between
 #' \code{date1} and \code{date2}.
+#' @keywords internal
 
 thirty_360_eu_plus <- function (date1, date2)
 {
@@ -264,6 +269,7 @@ thirty_360_eu_plus <- function (date1, date2)
 #' @param date2 A date-time object
 #' @return a numeric value representing the number of years between
 #' \code{date1} and \code{date2}.
+#' @keywords internal
 
 actual_360 <- function (date1, date2) {
   as.numeric(date2 - date1) / 360
@@ -290,6 +296,7 @@ actual_360 <- function (date1, date2) {
 #' @param date2 A date-time object
 #' @return a numeric value representing the number of years between
 #' \code{date1} and \code{date2}.
+#' @keywords internal
 
 actual_365 <- function (date1, date2) {
   as.numeric(date2 - date1) / 365
@@ -328,6 +335,7 @@ actual_365 <- function (date1, date2) {
 #' @param date2 A date-time object
 #' @return a numeric value representing the number of years between
 #' \code{date1} and \code{date2}.
+#' @keywords internal
 
 actual_actual_isda <- function (date1, date2)
 {

@@ -62,6 +62,7 @@ generate_schedule(effective_date, termination_date, tenor, calendar,
 }
 \seealso{
 Other calendar methods: \code{\link{adjust}},
-  \code{\link{is_good}}, \code{\link{locale}},
-  \code{\link{shift}}, \code{\link{tz}}
+  \code{\link{is_good}}, \code{\link{is_valid_bdc}},
+  \code{\link{locale}}, \code{\link{shift}},
+  \code{\link{tz}}
 }

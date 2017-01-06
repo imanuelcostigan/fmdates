@@ -36,6 +36,7 @@ is_good(lubridate::ymd(20160126), USNYCalendar())
 Calendar
 
 Other calendar methods: \code{\link{adjust}},
-  \code{\link{generate_schedule}}, \code{\link{locale}},
+  \code{\link{generate_schedule}},
+  \code{\link{is_valid_bdc}}, \code{\link{locale}},
   \code{\link{shift}}, \code{\link{tz}}
 }

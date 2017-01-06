@@ -26,3 +26,4 @@ Determine the date/time of March and September Equinoxes.
 This implements Jean Meeus' algorithm (Astronomical Algorithms
 1st Ed, 1991, Chapter 26).
 }
+\keyword{internal}

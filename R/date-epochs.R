@@ -4,6 +4,7 @@
 #'
 #' @param years a numeric vector of \code{years}
 #' @return a numeric vector
+#' @keywords internal
 
 easter_monday <- function (years)
 {
@@ -57,6 +58,7 @@ easter_monday <- function (years)
 #' @param season defines the Equinox sought. Can be \code{mar} (default) or
 #' \code{sep}.
 #' @return the date-time (UTC) of the Equinox (drop sub-minute precision)
+#' @keywords internal
 
 equinox <- function (years, season = 'mar', tz = "UTC", want_dt = FALSE)
 {
@@ -109,6 +111,7 @@ equinox <- function (years, season = 'mar', tz = "UTC", want_dt = FALSE)
 #'
 #' @param julian_day a numeric vector
 #' @return a POSIXct vector of Gregorian dates at midnight UTC time.
+#' @keywords internal
 
 julian_day_to_gregorian <- function (julian_day)
 {

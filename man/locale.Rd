@@ -22,5 +22,6 @@ locale(c(AUSYCalendar(), AUMECalendar()))
 \seealso{
 Other calendar methods: \code{\link{adjust}},
   \code{\link{generate_schedule}}, \code{\link{is_good}},
-  \code{\link{shift}}, \code{\link{tz}}
+  \code{\link{is_valid_bdc}}, \code{\link{shift}},
+  \code{\link{tz}}
 }
