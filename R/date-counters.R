@@ -29,7 +29,6 @@
 #' \code{date1} and \code{date2}.
 
 thirty_360 <- function (date1, date2) {
-  assertthat::assert_that(is(date1, "Date"), is(date1, "Date"))
   if (identical(date1, date2)) return (0)
 
   dd1 <- lubridate::mday(date1)/1
@@ -83,7 +82,6 @@ thirty_360 <- function (date1, date2) {
 
 thirty_360_us <- function (date1, date2)
 {
-  assertthat::assert_that(is(date1, "Date"), is(date1, "Date"))
   if (identical(date1, date2)) return (0)
 
   dd1 <- lubridate::mday(date1)/1
@@ -137,7 +135,6 @@ thirty_360_us <- function (date1, date2)
 
 thirty_360_eu <- function (date1, date2)
 {
-  assertthat::assert_that(is(date1, "Date"), is(date1, "Date"))
   dd1 <- lubridate::mday(date1)/1
   dd2 <- lubridate::mday(date2)/1
   mm1 <- lubridate::month(date1)
@@ -185,7 +182,6 @@ thirty_360_eu <- function (date1, date2)
 
 thirty_360_eu_isda <- function (date1, date2, maturity_date)
 {
-  assertthat::assert_that(is(date1, "Date"), is(date1, "Date"))
   dd1 <- lubridate::mday(date1)/1
   dd2 <- lubridate::mday(date2)/1
   mm1 <- lubridate::month(date1)
@@ -232,7 +228,6 @@ thirty_360_eu_isda <- function (date1, date2, maturity_date)
 
 thirty_360_eu_plus <- function (date1, date2)
 {
-  assertthat::assert_that(is(date1, "Date"), is(date1, "Date"))
   dd1 <- lubridate::mday(date1)/1
   dd2 <- lubridate::mday(date2)/1
   mm1 <- lubridate::month(date1)
@@ -271,7 +266,6 @@ thirty_360_eu_plus <- function (date1, date2)
 #' \code{date1} and \code{date2}.
 
 actual_360 <- function (date1, date2) {
-  assertthat::assert_that(is(date1, "Date"), is(date1, "Date"))
   as.numeric(date2 - date1) / 360
 }
 
@@ -298,7 +292,6 @@ actual_360 <- function (date1, date2) {
 #' \code{date1} and \code{date2}.
 
 actual_365 <- function (date1, date2) {
-  assertthat::assert_that(is(date1, "Date"), is(date1, "Date"))
   as.numeric(date2 - date1) / 365
 }
 
@@ -338,7 +331,6 @@ actual_365 <- function (date1, date2) {
 
 actual_actual_isda <- function (date1, date2)
 {
-  assertthat::assert_that(is(date1, "Date"), is(date1, "Date"))
   dib1 <- vector("numeric", NROW(date1))
   dib2 <- vector("numeric", NROW(date2))
 
