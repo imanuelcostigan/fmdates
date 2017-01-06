@@ -5,8 +5,8 @@ Version: 0.0.99
 Author: Imanuel Costigan <i.costigan@me.com>
 Maintainer: Imanuel Costigan <i.costigan@me.com>
 Description: Implements common date calculations relevant for specifying
-    the economic nature of financial market contracts and typically defined in
-    ISDA legal documentation.
+    the economic nature of financial market contracts that are typically defined 
+    by International Swap Dealer Association (ISDA) legal documentation.
 License: GPL-2
 Encoding: UTF-8
 LazyData: true
