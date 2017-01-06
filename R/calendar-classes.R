@@ -26,6 +26,8 @@
 #' @family calendar classes
 
 Calendar <- function(locale, tz) {
+  assertthat::assert_that(assertthat::is.string(locale) || is.na(locale),
+    assertthat::is.string(tz) || is.na(tz))
   function () {
     structure(list(locale = locale, tz = tz),
       class = c(paste0(locale, "Calendar"), "Calendar"))
@@ -87,7 +89,8 @@ USNYCalendar <- Calendar("USNY", "America/New_York")
 #' @export
 #' @family calendar classes
 JointCalendar <- function(calendars, rule = all) {
-  assertthat::assert_that(is_list_of(calendars, "Calendar"))
+  assertthat::assert_that(is_list_of(calendars, "Calendar"),
+    rule == all || rule == any)
   locales <- vapply(calendars, locale, "character")
   is_duplicated <- duplicated(locales)
   locales <- locales[!is_duplicated]
