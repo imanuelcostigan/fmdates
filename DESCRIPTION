@@ -21,7 +21,8 @@ Roxygen: list(markdown = TRUE)
 Suggests:
     testthat,
     knitr,
-    rmarkdown
+    rmarkdown,
+    covr
 VignetteBuilder: knitr
 Collate:
     'calendar-classes.R'
