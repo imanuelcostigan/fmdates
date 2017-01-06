@@ -19,7 +19,8 @@ knitr::opts_chunk$set(
   tidy = FALSE)
 ```
 
-Over-the-counter (OTC) derivatives comprise a significant proportion of trading activity in global financial markets. Their general contractual conventions are specified in what are known as International Swap and Derivatives Association (ISDA) definitions. For example, FX and currency option transactions are governed by the *1998 FX and Currency Options Definitions* and swap transactions are governed by the *2006 ISDA Definitions*. They describe in meticulous detail, among other things, how the dates of certain financial events should be determined. This includes how dates are defined to be good or bad and how bad dates are to be adjusted to good dates.
+Over-the-counter (OTC) derivatives comprise a significant proportion of trading activity in global financial markets. Their general contractual conventions are specified in what are known as [International Swap and Derivatives Association (ISDA) definitions](http://www.isda.org/publications/isdadefslist.aspx). For example, FX and currency option transactions are governed by the *1998 FX and Currency Options Definitions* and swap transactions are governed by the *2006 ISDA Definitions*. They describe in meticulous detail, among other things, how the dates of certain financial events should be determined. This includes how dates are defined to be good or bad and how bad dates are to be adjusted to good dates. They also define how to determine the length of time between two dates.
+
 
 ## Calendars
 
@@ -71,6 +72,22 @@ shift(ymd(20120229), years(1) + months(3), 'mf', ausy, TRUE)  # 1y3m
 shift(ymd(20120229), hours(1), 'mf', ausy, TRUE)  # periods < days ignored.
 ```
 
+## Date schedules
+
+With the aforementioned machinery, it is now possible to determine a schedule of dates that are required for a given financial contract. For example, counterparties to a vanilla interest rate swaps exchanged fixed rate payments in return for floating rate payments with regular frequency during the life of the contract. These form payment periods which can be determined using `generate_schedule()`.
+
+```{r schedules}
+# No stub
+generate_schedule(effective_date = ymd(20120103), termination_date = ymd(20130103), 
+  tenor = months(3), calendar = AUSYCalendar(), bdc = "mf", stub = "short_front", 
+  eom_rule = FALSE)
+# Front stub
+generate_schedule(effective_date = ymd(20120103), termination_date = ymd(20121203), 
+  tenor = months(3), calendar = AUSYCalendar(), bdc = "mf", stub = "short_front", 
+  eom_rule = FALSE)
+```
+
+
 ## Day count fractions
 
 It is possible to determine the length of a period. This known as the day count fraction, year fraction or day count. The package has implemented a number of common day counters (see `?year_frac`).
@@ -79,3 +96,4 @@ It is possible to determine the length of a period. This known as the day count 
 year_frac(ymd("2010-03-31"), ymd("2012-03-31"), "30/360us")
 year_frac(ymd("2010-02-28"), ymd("2012-03-31"), "act/365")
 ```
+
