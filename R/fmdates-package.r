@@ -6,4 +6,5 @@
 #'
 #' @name fmdates
 #' @docType package
+#' @importFrom methods is
 NULL

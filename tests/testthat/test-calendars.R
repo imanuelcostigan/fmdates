@@ -1,6 +1,6 @@
-context("Holidays")
+context("Calendars")
 
-library("lubridate")
+suppressPackageStartupMessages(library("lubridate"))
 
 test_that('Sydney calendar is correct', {
   # Source: http://www.industrialrelations.nsw.gov.au/oirwww/NSW_public_holidays/NSW_Public_Holidays_2013-2015.page
@@ -12,20 +12,20 @@ test_that('Sydney calendar is correct', {
     20140804, 20141006, 20141225, 20141226)
 
   # Check bad days are bad
-  ausy <- AUSYCalendar$new()
-  expect_identical(ausy$is_good(syd_hol_2013), rep(FALSE, NROW(syd_hol_2013)))
-  expect_identical(ausy$is_good(syd_hol_2014), rep(FALSE, NROW(syd_hol_2014)))
+  ausy <- AUSYCalendar()
+  expect_identical(is_good(syd_hol_2013, ausy), rep(FALSE, NROW(syd_hol_2013)))
+  expect_identical(is_good(syd_hol_2014, ausy), rep(FALSE, NROW(syd_hol_2014)))
 
   # Check weekends bad
-  expect_equal(ausy$is_good(ymd(20150214, 20150215)), c(FALSE, FALSE))
+  expect_equal(is_good(ymd(20150214, 20150215), ausy), c(FALSE, FALSE))
 
   # Check good days are ok
   bd2013 <- as_date(origin) + setdiff(ymd(20130101) + days(0:364), syd_hol_2013)
   bd2013 <- bd2013[!(wday(bd2013) %in% c(1, 7))]
   bd2014 <- as_date(origin) + setdiff(ymd(20140101) + days(0:364), syd_hol_2014)
   bd2014 <- bd2014[!(wday(bd2014) %in% c(1, 7))]
-  expect_identical(ausy$is_good(bd2013), rep(TRUE, NROW(bd2013)))
-  expect_identical(ausy$is_good(bd2014), rep(TRUE, NROW(bd2014)))
+  expect_identical(is_good(bd2013, ausy), rep(TRUE, NROW(bd2013)))
+  expect_identical(is_good(bd2014, ausy), rep(TRUE, NROW(bd2014)))
 })
 
 
@@ -39,20 +39,20 @@ test_that('Melbourne calendar is correct', {
     20141104, 20141225, 20141226)
 
   # Check bad days are bad
-  aume <- AUMECalendar$new()
-  expect_identical(aume$is_good(mel_hol_2013), rep(FALSE, NROW(mel_hol_2013)))
-  expect_identical(aume$is_good(mel_hol_2014), rep(FALSE, NROW(mel_hol_2014)))
+  aume <- AUMECalendar()
+  expect_identical(is_good(mel_hol_2013, aume), rep(FALSE, NROW(mel_hol_2013)))
+  expect_identical(is_good(mel_hol_2014, aume), rep(FALSE, NROW(mel_hol_2014)))
 
   # Check weekends bad
-  expect_equal(aume$is_good(ymd(20150214, 20150215)), c(FALSE, FALSE))
+  expect_equal(is_good(ymd(20150214, 20150215), aume), c(FALSE, FALSE))
 
   # Check good days are ok
   bd2013 <- as_date(origin) + setdiff(ymd(20130101) + days(0:364), mel_hol_2013)
   bd2013 <- bd2013[!(wday(bd2013) %in% c(1, 7))]
   bd2014 <- as_date(origin) + setdiff(ymd(20140101) + days(0:364), mel_hol_2014)
   bd2014 <- bd2014[!(wday(bd2014) %in% c(1, 7))]
-  expect_identical(aume$is_good(bd2013), rep(TRUE, NROW(bd2013)))
-  expect_identical(aume$is_good(bd2014), rep(TRUE, NROW(bd2014)))
+  expect_identical(is_good(bd2013, aume), rep(TRUE, NROW(bd2013)))
+  expect_identical(is_good(bd2014, aume), rep(TRUE, NROW(bd2014)))
 })
 
 
@@ -68,20 +68,20 @@ test_that('NYC calendar is correct', {
     20131014, 20131111, 20131128, 20131225)
 
   # Check bad days are bad
-  usny <- USNYCalendar$new()
-  expect_identical(usny$is_good(hol_2012), rep(FALSE, NROW(hol_2012)))
-  expect_identical(usny$is_good(hol_2013), rep(FALSE, NROW(hol_2013)))
+  usny <- USNYCalendar()
+  expect_identical(is_good(hol_2012, usny), rep(FALSE, NROW(hol_2012)))
+  expect_identical(is_good(hol_2013, usny), rep(FALSE, NROW(hol_2013)))
 
   # Check weekends bad
-  expect_equal(usny$is_good(ymd(20150214, 20150215)), c(FALSE, FALSE))
+  expect_equal(is_good(ymd(20150214, 20150215),usny), c(FALSE, FALSE))
 
   # Check good days are ok
   bd2012 <- as_date(origin) + setdiff(ymd(20120101) + days(0:365), hol_2012)
   bd2012 <- bd2012[!(wday(bd2012) %in% c(1, 7))]
   bd2013 <- as_date(origin) + setdiff(ymd(20130101) + days(0:364), hol_2013)
   bd2013 <- bd2013[!(wday(bd2013) %in% c(1, 7))]
-  expect_identical(usny$is_good(bd2012), rep(TRUE, NROW(bd2012)))
-  expect_identical(usny$is_good(bd2013), rep(TRUE, NROW(bd2013)))
+  expect_identical(is_good(bd2012, usny), rep(TRUE, NROW(bd2012)))
+  expect_identical(is_good(bd2013, usny), rep(TRUE, NROW(bd2013)))
 })
 
 test_that('London calendar is correct', {
@@ -94,20 +94,20 @@ test_that('London calendar is correct', {
     20131225, 20131226)
 
   # Check bad days are bad
-  gblo <- GBLOCalendar$new()
-  expect_identical(gblo$is_good(hol_2012), rep(FALSE, NROW(hol_2012)))
-  expect_identical(gblo$is_good(hol_2013), rep(FALSE, NROW(hol_2013)))
+  gblo <- GBLOCalendar()
+  expect_identical(is_good(hol_2012, gblo), rep(FALSE, NROW(hol_2012)))
+  expect_identical(is_good(hol_2013, gblo), rep(FALSE, NROW(hol_2013)))
 
   # Check weekends bad
-  expect_equal(gblo$is_good(ymd(20150214, 20150215)), c(FALSE, FALSE))
+  expect_equal(is_good(ymd(20150214, 20150215),gblo), c(FALSE, FALSE))
 
   # Check good days are ok
   bd2012 <- as_date(origin) + setdiff(ymd(20120101) + days(0:365), hol_2012)
   bd2012 <- bd2012[!(wday(bd2012) %in% c(1, 7))]
   bd2013 <- as_date(origin) + setdiff(ymd(20130101) + days(0:364), hol_2013)
   bd2013 <- bd2013[!(wday(bd2013) %in% c(1, 7))]
-  expect_identical(gblo$is_good(bd2012), rep(TRUE, NROW(bd2012)))
-  expect_identical(gblo$is_good(bd2013), rep(TRUE, NROW(bd2013)))
+  expect_identical(is_good(bd2012, gblo), rep(TRUE, NROW(bd2012)))
+  expect_identical(is_good(bd2013, gblo), rep(TRUE, NROW(bd2013)))
 })
 
 test_that('TARGET calendar is correct', {
@@ -116,16 +116,16 @@ test_that('TARGET calendar is correct', {
   hol_2013 <- ymd(20130101, 20130329, 20130401, 20130501, 20131225, 20131226)
 
   # Check bad days are bad
-  euta <- EUTACalendar$new()
-  expect_identical(euta$is_good(hol_2013), rep(FALSE, NROW(hol_2013)))
+  euta <- EUTACalendar()
+  expect_identical(is_good(hol_2013, euta), rep(FALSE, NROW(hol_2013)))
 
   # Check weekends bad
-  expect_equal(euta$is_good(ymd(20150214, 20150215)), c(FALSE, FALSE))
+  expect_equal(is_good(ymd(20150214, 20150215),euta), c(FALSE, FALSE))
 
   # Check good days are ok
   bd2013 <- as_date(origin) + setdiff(ymd(20130101) + days(0:364), hol_2013)
   bd2013 <- bd2013[!(wday(bd2013) %in% c(1, 7))]
-  expect_identical(euta$is_good(bd2013), rep(TRUE, NROW(bd2013)))
+  expect_identical(is_good(bd2013, euta), rep(TRUE, NROW(bd2013)))
 })
 
 test_that('Auckland and Wellington calendars are correct', {
@@ -139,23 +139,23 @@ test_that('Auckland and Wellington calendars are correct', {
     25042016, 06062016, 24102016, 27122016, 26122016)
 
   # Check bad days are bad
-  nzau <- NZAUCalendar$new()
-  nzwe <- NZWECalendar$new()
-  expect_identical(nzau$is_good(akl_hol_2014), rep(FALSE, NROW(akl_hol_2014)))
-  expect_identical(nzau$is_good(akl_hol_2016), rep(FALSE, NROW(akl_hol_2016)))
-  expect_identical(nzwe$is_good(wlg_hol_2016), rep(FALSE, NROW(wlg_hol_2016)))
+  nzau <- NZAUCalendar()
+  nzwe <- NZWECalendar()
+  expect_identical(is_good(akl_hol_2014, nzau), rep(FALSE, NROW(akl_hol_2014)))
+  expect_identical(is_good(akl_hol_2016, nzau), rep(FALSE, NROW(akl_hol_2016)))
+  expect_identical(is_good(wlg_hol_2016, nzwe), rep(FALSE, NROW(wlg_hol_2016)))
 
   # Check weekends bad
-  expect_equal(nzau$is_good(ymd(20150214, 20150215)), c(FALSE, FALSE))
-  expect_equal(nzwe$is_good(ymd(20150214, 20150215)), c(FALSE, FALSE))
+  expect_equal(is_good(ymd(20150214, 20150215),nzau), c(FALSE, FALSE))
+  expect_equal(is_good(ymd(20150214, 20150215),nzwe), c(FALSE, FALSE))
 
   # Check good days are ok
   bd2014 <- as_date(origin) + setdiff(ymd(20140101) + days(0:364), akl_hol_2014)
   bd2014 <- bd2014[!(wday(bd2014) %in% c(1, 7))]
-  expect_identical(nzau$is_good(bd2014), rep(TRUE, NROW(bd2014)))
+  expect_identical(is_good(bd2014, nzau), rep(TRUE, NROW(bd2014)))
   bd2016 <- as_date(origin) + setdiff(ymd(20160101) + days(0:365), wlg_hol_2016)
   bd2016 <- bd2016[!(wday(bd2016) %in% c(1, 7))]
-  expect_identical(nzwe$is_good(bd2016), rep(TRUE, NROW(bd2016)))
+  expect_identical(is_good(bd2016, nzwe), rep(TRUE, NROW(bd2016)))
 })
 
 test_that('Toyko calendars are correct', {
@@ -171,20 +171,20 @@ test_that('Toyko calendars are correct', {
     23122014, 31122014)
 
   # Check bad days are bad
-  jpto <- JPTOCalendar$new()
-  expect_identical(jpto$is_good(hol_2013), rep(FALSE, NROW(hol_2013)))
-  expect_identical(jpto$is_good(hol_2014), rep(FALSE, NROW(hol_2014)))
+  jpto <- JPTOCalendar()
+  expect_identical(is_good(hol_2013, jpto), rep(FALSE, NROW(hol_2013)))
+  expect_identical(is_good(hol_2014, jpto), rep(FALSE, NROW(hol_2014)))
 
   # Check weekends bad
-  expect_equal(jpto$is_good(ymd(20150214, 20150215)), c(FALSE, FALSE))
+  expect_equal(is_good(ymd(20150214, 20150215),jpto), c(FALSE, FALSE))
 
   # Check good days are ok
   bd2013 <- as_date(origin) + setdiff(ymd(20130101) + days(0:364), hol_2013)
   bd2013 <- bd2013[!(wday(bd2013) %in% c(1, 7))]
-  expect_identical(jpto$is_good(bd2013), rep(TRUE, NROW(bd2013)))
+  expect_identical(is_good(bd2013, jpto), rep(TRUE, NROW(bd2013)))
   bd2014 <- as_date(origin) + setdiff(ymd(20140101) + days(0:364), hol_2014)
   bd2014 <- bd2014[!(wday(bd2014) %in% c(1, 7))]
-  expect_identical(jpto$is_good(bd2014), rep(TRUE, NROW(bd2014)))
+  expect_identical(is_good(bd2014, jpto), rep(TRUE, NROW(bd2014)))
 })
 
 
@@ -199,20 +199,20 @@ test_that("Zurich calendars are correct", {
     31122017)
 
   # Check bad days are bad
-  chzh <- CHZHCalendar$new()
-  expect_identical(chzh$is_good(h2016), rep(FALSE, NROW(h2016)))
-  expect_identical(chzh$is_good(h2017), rep(FALSE, NROW(h2017)))
+  chzh <- CHZHCalendar()
+  expect_identical(is_good(h2016, chzh), rep(FALSE, NROW(h2016)))
+  expect_identical(is_good(h2017, chzh), rep(FALSE, NROW(h2017)))
 
   # Check weekends are bad
-  expect_equal(chzh$is_good(ymd(20150214, 20150215)), c(FALSE, FALSE))
+  expect_equal(is_good(ymd(20150214, 20150215),chzh), c(FALSE, FALSE))
 
   # Check good days are ok
   g2016 <- as_date(origin) + setdiff(ymd(20160101) + days(0:365), h2016)
   g2016 <- g2016[!(wday(g2016) %in% c(1, 7))]
-  expect_identical(chzh$is_good(g2016), rep(TRUE, NROW(g2016)))
+  expect_identical(is_good(g2016, chzh), rep(TRUE, NROW(g2016)))
   g2017 <- as_date(origin) + setdiff(ymd(20170101) + days(0:364), h2017)
   g2017 <- g2017[!(wday(g2017) %in% c(1, 7))]
-  expect_identical(chzh$is_good(g2017), rep(TRUE, NROW(g2017)))
+  expect_identical(is_good(g2017, chzh), rep(TRUE, NROW(g2017)))
 })
 
 test_that("Hong Kong calendars are correct", {
@@ -223,16 +223,16 @@ test_that("Hong Kong calendars are correct", {
     01102016, 10102016, 26122016, 27122016)
 
   # Check bad days are bad
-  hk <- HKHKCalendar$new()
-  expect_identical(hk$is_good(h2016), rep(FALSE, NROW(h2016)))
+  hk <- HKHKCalendar()
+  expect_identical(is_good(h2016, hk), rep(FALSE, NROW(h2016)))
 
   # Check weekends are bad
-  expect_identical(hk$is_good(ymd(20150214, 20150215)), c(FALSE, FALSE))
+  expect_identical(is_good(ymd(20150214, 20150215),hk), c(FALSE, FALSE))
 
   # Check good days are ok
   g2016 <- as_date(origin) + setdiff(ymd(20160101) + days(0:365), h2016)
   g2016 <- g2016[!(wday(g2016) %in% c(1, 7))]
-  expect_identical(hk$is_good(g2016), rep(TRUE, NROW(g2016)))
+  expect_identical(is_good(g2016, hk), rep(TRUE, NROW(g2016)))
 })
 
 test_that("Oslo calendars are correct", {
@@ -242,68 +242,68 @@ test_that("Oslo calendars are correct", {
     01052016, 05052016, 15052016, 16052016, 17052016, 25122016, 26122016)
 
   # Check bad days are bad
-  noos <- NOOSCalendar$new()
-  expect_identical(noos$is_good(h2016), rep(FALSE, NROW(h2016)))
+  noos <- NOOSCalendar()
+  expect_identical(is_good(h2016, noos), rep(FALSE, NROW(h2016)))
 
   # Check weekends are bad
-  expect_identical(noos$is_good(ymd(20150214, 20150215)), c(FALSE, FALSE))
+  expect_identical(is_good(ymd(20150214, 20150215),noos), c(FALSE, FALSE))
 
   # Check good days are ok
   g2016 <- as_date(origin) + setdiff(ymd(20160101) + days(0:365), h2016)
   g2016 <- g2016[!(wday(g2016) %in% c(1, 7))]
-  expect_identical(noos$is_good(g2016), rep(TRUE, NROW(g2016)))
+  expect_identical(is_good(g2016, noos), rep(TRUE, NROW(g2016)))
 })
 
 
 test_that("Joint calendars work effectively", {
   hols <- ymd(20141006, 20141104, 20141225)
-  syme <- JointCalendar$new(list(AUSYCalendar$new(), AUMECalendar$new()), all)
-  expect_identical(syme$is_good(hols), c(FALSE, FALSE, FALSE))
+  syme <- JointCalendar(list(AUSYCalendar(), AUMECalendar()), all)
+  expect_identical(is_good(hols, syme), c(FALSE, FALSE, FALSE))
   syme$rule <- any
-  expect_identical(syme$is_good(hols), c(TRUE, TRUE, FALSE))
-  expect_true(is(c(AUSYCalendar$new(), AUMECalendar$new()), "JointCalendar"))
-  expect_equal(c(AUSYCalendar$new(), AUSYCalendar$new()),
-    JointCalendar$new(list(AUSYCalendar$new())))
-  expect_equal(syme[2], JointCalendar$new(list(AUMECalendar$new()), any))
+  expect_identical(is_good(hols, syme), c(TRUE, TRUE, FALSE))
+  expect_true(is(c(AUSYCalendar(), AUMECalendar()), "JointCalendar"))
+  expect_equal(c(AUSYCalendar(), AUSYCalendar()),
+    JointCalendar(list(AUSYCalendar())))
+  expect_equal(syme[2], JointCalendar(list(AUMECalendar()), any))
 })
 
 context("Adjusters")
 
 test_that("Adjust method works as expected", {
-  ausy <- AUSYCalendar$new()
-  gblo <- GBLOCalendar$new()
-  sylo <- JointCalendar$new(list(ausy, gblo), all)
-  expect_identical(ausy$adjust(ymd("20120102"), "u"), ymd("20120102"))
-  expect_identical(ausy$adjust(ymd("20120102"), "f"), ymd("20120103"))
-  expect_identical(ausy$adjust(ymd("20120331"), "mf"), ymd("20120330"))
-  expect_identical(ausy$adjust(ymd("20120102"), "p"), ymd("20111230"))
-  expect_identical(ausy$adjust(ymd("20120102"), "mp"), ymd("20120103"))
-  expect_identical(ausy$adjust(ymd("20120115"), "ms"), ymd("20120113"))
-  expect_identical(sylo$adjust(ymd("20121225"), "mf"), ymd("20121227"))
+  ausy <- AUSYCalendar()
+  gblo <- GBLOCalendar()
+  sylo <- JointCalendar(list(ausy, gblo), all)
+  expect_identical(adjust(ymd("20120102"), "u", ausy), ymd("20120102"))
+  expect_identical(adjust(ymd("20120102"), "f", ausy), ymd("20120103"))
+  expect_identical(adjust(ymd("20120331"), "mf", ausy), ymd("20120330"))
+  expect_identical(adjust(ymd("20120102"), "p", ausy), ymd("20111230"))
+  expect_identical(adjust(ymd("20120102"), "mp", ausy), ymd("20120103"))
+  expect_identical(adjust(ymd("20120115"), "ms", ausy), ymd("20120113"))
+  expect_identical(adjust(ymd("20121225"), "mf", sylo), ymd("20121227"))
 })
 
 
 context("Shifters")
 
 test_that("Shift method works as expected", {
-  ausy <- AUSYCalendar$new()
-  expect_identical(ausy$shift(ymd("20120229"), months(1), "u", FALSE), ymd("20120329"))
-  expect_identical(ausy$shift(ymd("20120228"), months(1), "u", FALSE), ymd("20120328"))
-  expect_identical(ausy$shift(ymd("20120331"), months(1), "u", FALSE), ymd("20120430"))
-  expect_identical(ausy$shift(ymd("20120229"), years(1), "u", FALSE), ymd("20130228"))
-  expect_identical(ausy$shift(ymd("20120229"), months(1), "u", TRUE), ymd("20120330"))
-  expect_identical(ausy$shift(ymd("20120229"), years(1), "u", FALSE), ymd("20130228"))
-  expect_identical(ausy$shift(ymd("20120229"), years(1), "u", TRUE), ymd("20130228"))
-  expect_identical(ausy$shift(ymd("20120424"), days(1), "u", TRUE), ymd("20120426"))
-  expect_identical(ausy$shift(ymd("20120430"), months(1), "u", FALSE), ymd("20120530"))
-  expect_identical(ausy$shift(ymd("20120430"), months(1), "u", TRUE), ymd("20120531"))
-  expect_identical(ausy$shift(ymd("20120331"), months(1), "u", FALSE), ymd("20120430"))
-  expect_identical(ausy$shift(ymd("20120331"), months(1), "u", TRUE), ymd("20120430"))
-  expect_identical(ausy$shift(ymd("20121225"), days(10), "mf", TRUE), ymd("20130110"))
-  expect_identical(ausy$shift(ymd(20110429), months(1), 'mf', TRUE), ymd(20110531))
-  expect_identical(ausy$shift(ymd("20120601"), years(1) - days(1), "mf", FALSE), ymd("20130531"))
-  gblo <- GBLOCalendar$new()
-  expect_identical(gblo$shift(ymd("20151127"), days(-2), "mf", TRUE), ymd("20151125"))
-  expect_identical(gblo$shift(ymd("20151127"), days(2), "mf", TRUE), ymd("20151201"))
+  ausy <- AUSYCalendar()
+  expect_identical(shift(ymd("20120229"), months(1), "u", ausy, FALSE), ymd("20120329"))
+  expect_identical(shift(ymd("20120228"), months(1), "u", ausy, FALSE), ymd("20120328"))
+  expect_identical(shift(ymd("20120331"), months(1), "u", ausy, FALSE), ymd("20120430"))
+  expect_identical(shift(ymd("20120229"), years(1), "u", ausy, FALSE), ymd("20130228"))
+  expect_identical(shift(ymd("20120229"), months(1), "u", ausy, TRUE), ymd("20120330"))
+  expect_identical(shift(ymd("20120229"), years(1), "u", ausy, FALSE), ymd("20130228"))
+  expect_identical(shift(ymd("20120229"), years(1), "u", ausy, TRUE), ymd("20130228"))
+  expect_identical(shift(ymd("20120424"), days(1), "u", ausy, TRUE), ymd("20120426"))
+  expect_identical(shift(ymd("20120430"), months(1), "u", ausy, FALSE), ymd("20120530"))
+  expect_identical(shift(ymd("20120430"), months(1), "u", ausy, TRUE), ymd("20120531"))
+  expect_identical(shift(ymd("20120331"), months(1), "u", ausy, FALSE), ymd("20120430"))
+  expect_identical(shift(ymd("20120331"), months(1), "u", ausy, TRUE), ymd("20120430"))
+  expect_identical(shift(ymd("20121225"), days(10), "mf", ausy, TRUE), ymd("20130110"))
+  expect_identical(shift(ymd(20110429), months(1), 'mf', ausy, TRUE), ymd(20110531))
+  expect_identical(shift(ymd("20120601"), years(1) - days(1), "mf", ausy, FALSE), ymd("20130531"))
+  gblo <- GBLOCalendar()
+  expect_identical(shift(ymd("20151127"), days(-2), "mf", gblo, TRUE), ymd("20151125"))
+  expect_identical(shift(ymd("20151127"), days(2), "mf", gblo, TRUE), ymd("20151201"))
 })
 

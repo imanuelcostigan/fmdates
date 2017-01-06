@@ -141,8 +141,9 @@ jde_to_gregorian <- function (jde, tz = "UTC", want_dt = FALSE) {
   res <- julian_day_to_gregorian(jde)
   if (!want_dt) {
     # Meeus pg 71 has Delta T = TD - UT.
-    res <- (res - lubridate::seconds(delta_t(res))) %>%
-      lubridate::floor_date(unit = "minute")
+    res <- lubridate::floor_date(res - lubridate::seconds(delta_t(res)),
+      unit = "minute")
+
   }
   if (tz != "UTC") {
     return (lubridate::with_tz(res, tz = tz))
@@ -153,13 +154,12 @@ jde_to_gregorian <- function (jde, tz = "UTC", want_dt = FALSE) {
 
 to_jd <- function (dates) {
   # Only gregorian calendar is supported.
-  dates_utc <- dates %>% lubridate::with_tz(tzone = "UTC")
+  dates_utc <- lubridate::with_tz(dates, tzone = "UTC")
   y <- lubridate::year(dates_utc)
   m <- lubridate::month(dates_utc)
   dom <- lubridate::mday(dates_utc)
   if (!lubridate::is.Date(dates)) {
-    f_dom <- ((dates_utc - ISOdate(y, m, dom, hour = 0, tz = "UTC")) / 24) %>%
-      as.numeric()
+    f_dom <- as.numeric((dates_utc - ISOdate(y, m, dom, hour = 0, tz = "UTC")) / 24)
   } else {
     f_dom <- rep(0, length(dates))
   }
@@ -328,24 +328,29 @@ true_moon_phase <- function (k, phase) {
       -0.00002
     )
   one_n <- rep(1, length(ee))
-  new_full_phase_coefficients_a <- c(one_n, ee, one_n, one_n, ee, ee, ee ^ 2,
-    one_n, one_n, ee, one_n, ee, ee, ee, rep(one_n, 11)) %>% matrix(ncol = 25)
+  new_full_phase_coefficients_a <- matrix(c(one_n, ee, one_n, one_n, ee, ee,
+    ee ^ 2, one_n, one_n, ee, one_n, ee, ee, ee, rep(one_n, 11)),
+    ncol = 25)
   new_full_phase_coefficients_b <- sin(c(mmd, mm, 2 * mmd, 2 * ff, mmd - mm,
     mmd + mm, 2 * mm, mmd - 2 * ff, mmd + 2 * ff, 2 * mmd + mm, 3 * mmd,
     mm + 2 * ff, mm - 2 * ff, 2 * mmd - mm, omega, mmd + 2 * mm,
     2 * mmd - 2 * ff, 3 * mm, mmd + mm - 2 * ff, 2 * mmd + 2 * ff,
     mmd + mm + 2 * ff, mmd - mm + 2 * ff, mmd - mm - 2 * ff, 3 * mmd + mm,
-    4 * mmd)) %>% matrix(ncol = 25)
+    4 * mmd))
+  new_full_phase_coefficients_b <-
+    matrix(new_full_phase_coefficients_b, ncol = 25)
   new_full_phase_coefficients <- new_full_phase_coefficients_a *
     new_full_phase_coefficients_b
   qtr_phase_coefficients_a <- c(one_n, ee, ee, one_n, one_n, ee, ee ^ 2, one_n,
-    one_n, one_n, ee, ee, ee, ee ^ 2, ee, rep(one_n, 10)) %>% matrix(ncol = 25)
+    one_n, one_n, ee, ee, ee, ee ^ 2, ee, rep(one_n, 10))
+  qtr_phase_coefficients_a <- matrix(qtr_phase_coefficients_a, ncol = 25)
   qtr_phase_coefficients_b <- sin(c(mmd, mm, mmd + mm, 2 * mmd, 2 * ff,
     mmd - mm, 2 * mm, mmd - 2 * ff, mmd + 2 * ff, 3 * mmd, 2 * mmd - mm,
     mm + 2 * ff, mm - 2 * ff, mmd + 2 * mm, 2 * mmd + mm, omega,
     mmd - mm - 2 * ff, 2 * mmd + 2 * ff, mmd + mm + 2 * ff, mmd - 2 * mm,
     mmd + mm - 2 * ff, 3 * mm, 2 * mmd - 2 * ff, mmd - mm + 2 * ff,
-    3 * mmd + mm)) %>% matrix(ncol = 25)
+    3 * mmd + mm))
+  qtr_phase_coefficients_b <- matrix(qtr_phase_coefficients_b, ncol = 25)
   qtr_phase_coefficients <- qtr_phase_coefficients_a * qtr_phase_coefficients_b
   ww <- 0.00306 - 0.00038 * ee * cos(mm) + 0.00026 * cos(mmd) -
     0.00002 * cos(mmd - mm) + 0.00002 * cos(mmd + mm) + 0.00002 * cos(2 * ff)
@@ -367,7 +372,8 @@ true_moon_phase <- function (k, phase) {
   a13 <- rads((239.56 + 25.513099 * k) %% 360)
   a14 <- rads((331.55 + 3.592518 * k) %% 360)
   planetary_coefficients <- sin(c(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11,
-    a12, a13, a14)) %>% matrix(ncol = 14)
+    a12, a13, a14))
+  planetary_coefficients <- matrix(planetary_coefficients, ncol = 14)
   if (phase == "new") {
     jde <- jde + new_full_phase_coefficients %*% new_moon_constant
   } else if (phase == "full") {
@@ -377,7 +383,7 @@ true_moon_phase <- function (k, phase) {
   } else {
     jde <- jde + qtr_phase_coefficients %*% qtr_phase_constant - ww
   }
-  (jde + planetary_coefficients %*% planetary_constants) %>% drop()
+  drop(jde + planetary_coefficients %*% planetary_constants)
 }
 
 next_moon_phase <- function (dates, phase, tz = "UTC", want_dt = FALSE) {
@@ -391,7 +397,7 @@ next_moon_phase <- function (dates, phase, tz = "UTC", want_dt = FALSE) {
   }
   jde0 <- to_jd(dates + lubridate::seconds(delta_t(dates)))
   yrs <- (lubridate::year(dates) + lubridate::yday(dates) / 365 - 2000)
-  k <- (yrs * 12.3685) %>% floor()
+  k <- floor(yrs * 12.3685)
   guess <- mean_moon_phase(k, phase)
   is_not_after <- jde0 > guess
   while (any(jde0 > guess)) {

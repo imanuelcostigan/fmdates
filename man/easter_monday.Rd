@@ -15,4 +15,3 @@ a numeric vector
 \description{
 Determine the day of the year that the Western Easter Monday falls on.
 }
-
