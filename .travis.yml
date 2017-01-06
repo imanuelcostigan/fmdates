@@ -13,7 +13,7 @@ matrix:
     - os: linux
       r: release
       env: R_CODECOV=true
-    - os:
+    - os: linux
       r: devel
     - os: osx
       r: release
