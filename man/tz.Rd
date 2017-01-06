@@ -21,8 +21,8 @@ vector of time zones in the case of joint calendars
 Extract time zone from calendars
 }
 \examples{
-tz(AUSYCalendar())
-tz(c(AUSYCalendar(), AUMECalendar()))
+lubridate::tz(AUSYCalendar())
+lubridate::tz(c(AUSYCalendar(), AUMECalendar()))
 }
 \seealso{
 Other calendar methods: \code{\link{adjust}},

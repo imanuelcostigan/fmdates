@@ -446,8 +446,8 @@ is_good.JointCalendar <- function(dates, calendar) {
 #' @return a string representing the time zone (e.g. "Australia/Sydney") or
 #' vector of time zones in the case of joint calendars
 #' @examples
-#' tz(AUSYCalendar())
-#' tz(c(AUSYCalendar(), AUMECalendar()))
+#' lubridate::tz(AUSYCalendar())
+#' lubridate::tz(c(AUSYCalendar(), AUMECalendar()))
 #' @importFrom lubridate tz
 #' @export
 #' @family calendar methods
