@@ -551,9 +551,17 @@ print.JointCalendar <- function(x, ...) {
   invisible(x)
 }
 
+#' Calendar class checkers
+#'
+#' @param x object to be tested
+#' @return `TRUE` if `x` inherits from `Calendar` or `JointCalendar`
+#'   (`is.Calendar` and `is.JointCalendar` respectively) and `FALSE` otherwise.
+#' @name is
 #' @export
-is.Calendar <- function (x) inherits(x, "Calendar")
+is.Calendar <- function(x) inherits(x, "Calendar")
+
 #' @export
+#' @rdname is
 is.JointCalendar <- function(x) inherits(x, "JointCalendar")
 
 
