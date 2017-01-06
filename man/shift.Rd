@@ -10,7 +10,7 @@ shift(dates, period, bdc = "u", calendar = EmptyCalendar(),
 \arguments{
 \item{dates}{a vector of dates to shift and adjust}
 
-\item{period}{an atomic instance of the \link[`lubridate:Period-class`]{period
+\item{period}{an atomic instance of the \link[lubridate:Period-class]{period
 class} in the sense that only one of its slots
 should be non-zero. It must also only be a day, month or year period type.}
 
@@ -43,5 +43,6 @@ shift(ymd("20120229"), months(1), "u", ausy, TRUE)
 }
 \seealso{
 Other calendar methods: \code{\link{adjust}},
-  \code{\link{is_good}}
+  \code{\link{generate_schedule}}, \code{\link{is_good}},
+  \code{\link{locale}}, \code{\link{tz}}
 }

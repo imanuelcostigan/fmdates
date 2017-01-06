@@ -60,3 +60,8 @@ eom_rule <- FALSE
 generate_schedule(effective_date, termination_date, tenor, calendar,
  bdc, stub, eom_rule)
 }
+\seealso{
+Other calendar methods: \code{\link{adjust}},
+  \code{\link{is_good}}, \code{\link{locale}},
+  \code{\link{shift}}, \code{\link{tz}}
+}

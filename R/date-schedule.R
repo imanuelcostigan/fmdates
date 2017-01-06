@@ -38,6 +38,7 @@
 #' generate_schedule(effective_date, termination_date, tenor, calendar,
 #'  bdc, stub, eom_rule)
 #' @export
+#' @family calendar methods
 
 generate_schedule <- function (effective_date, termination_date, tenor,
   calendar = EmptyCalendar(), bdc = "u", stub = "short_front", eom_rule = FALSE,

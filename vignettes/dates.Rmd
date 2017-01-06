@@ -41,11 +41,11 @@ library("lubridate")
 library("fmdates")
 ausy <- AUSYCalendar()
 aume <- AUMECalendar()
-syme <- JointCalendar$new(list(ausy, aume), all)
-ausy$is_good(ymd(20140404))
-syme$is_good(ymd(20141104)) # Melbourne Cup holiday
+syme <- c(ausy, aume) # handy JointCalendar construction approach
+is_good(ymd(20140404), ausy)
+is_good(ymd(20141104), syme) # Melbourne Cup holiday
 syme$rule <- any
-syme$is_good(ymd(20141104))
+is_good(ymd(20141104), syme)
 ```
 
 ## Bad day adjusters

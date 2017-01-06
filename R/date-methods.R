@@ -76,7 +76,7 @@ adjust <- function(dates, bdc, calendar) {
 #'
 #' @param dates a vector of dates to shift and adjust
 #' @param period an atomic instance of the [period
-#'   class][`lubridate::Period-class`] in the sense that only one of its slots
+#'   class][lubridate::Period-class] in the sense that only one of its slots
 #'   should be non-zero. It must also only be a day, month or year period type.
 #' @param bdc the business day convention used to roll the `dates` if necessary
 #'   (default: "u" - unadjusted)

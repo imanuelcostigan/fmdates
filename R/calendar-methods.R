@@ -26,7 +26,16 @@
 
 is_good <- function(dates, calendar) UseMethod("is_good", calendar)
 
-locale <- function(x, ...) UseMethod("locale")
+#' Extract locale from calendars
+#'
+#' @param x an instance of a [`Calendar`] or [`JointCalendar`] object
+#' @return a string representing the locale (e.g. "AUSY")
+#' @examples
+#' locale(AUSYCalendar())
+#' locale(c(AUSYCalendar(), AUMECalendar()))
+#' @export
+#' @family calendar methods
+locale <- function(x) UseMethod("locale", x)
 
 # Methods -----------------------------------------------------------------
 
@@ -431,22 +440,35 @@ is_good.JointCalendar <- function(dates, calendar) {
   apply(res, 1, Reduce, f = calendar$rule)
 }
 
+#' Extract time zone from calendars
+#'
+#' @param x an instance of a [`Calendar`] or [`JointCalendar`] object
+#' @return a string representing the time zone (e.g. "Australia/Sydney") or
+#' vector of time zones in the case of joint calendars
+#' @examples
+#' tz(AUSYCalendar())
+#' tz(c(AUSYCalendar(), AUMECalendar()))
 #' @importFrom lubridate tz
 #' @export
+#' @family calendar methods
+#' @name tz
 tz.Calendar <- function(x) {
   x$tz
 }
 
+#' @rdname tz
 #' @importFrom lubridate tz
 #' @export
 tz.JointCalendar <- function(x) {
   x$tzs
 }
 
+#' @export
 locale.default <- function(x, ...) {
   x$locale
 }
 
+#' @export
 locale.JointCalendar <- function(x, ...) {
   x$locales
 }
@@ -505,18 +527,34 @@ c.JointCalendar <- function(..., recursive = FALSE) {
 }
 
 #' @export
+format.Calendar <- function(x, ...) {
+  paste0("<", x$locale, "> TZ: ", x$tz)
+}
+
+#' @export
+format.JointCalendar <- function(x, ...) {
+  rule <- if (identical(x$rule, all)) "all" else "any"
+  paste0("<JointCalendar> ", paste0(x$locales, collapse=", "), "\n",
+    "   TZ: ", paste0(x$tzs, collapse = ", "), "\n",
+    "   Join rule: ", rule)
+}
+
+#' @export
 print.Calendar <- function(x, ...) {
-  cat(paste0("<", x$locale, "> TZ:"), x$tz, "\n"); invisible(x)
+  cat(format(x, ...), "\n")
+  invisible(x)
 }
 
 #' @export
 print.JointCalendar <- function(x, ...) {
-  rule <- if (identical(x$rule, all)) "all" else "any"
-  cat("<JointCalendar>", paste0(x$locales, collapse=", "), "\n")
-  cat("   TZ:", paste0(x$tzs, collapse = ", "), "\n")
-  cat("   Join rule:", rule, "\n")
+  cat(format(x, ...) , "\n")
   invisible(x)
 }
+
+#' @export
+is.Calendar <- function (x) inherits(x, "Calendar")
+#' @export
+is.JointCalendar <- function(x) inherits(x, "JointCalendar")
 
 
 # Helpers ------------------------------------------------------------------
