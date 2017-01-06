@@ -19,57 +19,74 @@ knitr::opts_chunk$set(
   tidy = FALSE)
 ```
 
-Over-the-counter (OTC) derivatives comprise a significant proportion of trading activity in global financial markets. Their general contractual conventions are specified in what are known as International Swap and Derivatives Association (ISDA) definitions. For example, FX and currency option transactions are governed by the *1998 FX and Currency Options Definitions* and swap transactions are governed by the *2006 ISDA Definitions*. They describe in meticulous detail, among other things, how the dates of certain financial events should be determined. This includes how dates are defined to be good or bad and how bad dates are to be adjusted to good dates.
+Over-the-counter (OTC) derivatives comprise a significant proportion of trading activity in global financial markets. Their general contractual conventions are specified in what are known as [International Swap and Derivatives Association (ISDA) definitions](http://www.isda.org/publications/isdadefslist.aspx). For example, FX and currency option transactions are governed by the *1998 FX and Currency Options Definitions* and swap transactions are governed by the *2006 ISDA Definitions*. They describe in meticulous detail, among other things, how the dates of certain financial events should be determined. This includes how dates are defined to be good or bad and how bad dates are to be adjusted to good dates. They also define how to determine the length of time between two dates.
+
 
 ## Calendars
 
-The `Calendar` class is extended by and provides the interface for city specific
-calendar classes (e.g. `USNYCalendar`). The generator objects for these city 
-calendars have a name prefixed by four upper case letters: the first two being a 
-country code (e.g. `US`) and the latter two being a city code (e.g. `NY`). 
-Supported calendars are documented in `?Calendar`.
+The `Calendar` class is extended by city specific calendar classes (e.g.
+`USNYCalendar`). The functions that create such city calendars have a name
+prefixed by four upper case letters: the first two being a country code (e.g.
+`US`) and the latter two being a city code (e.g. `NY`). Supported calendars are
+documented in `?Calendar`.
 
-The interface contains three key methods: `is_good`, `adjust` and `shift`. These
-are described below.
+Calendars are associated with three key methods: `is_good`, `adjust` and
+`shift`. These are described below.
 
 ## Good day functions
 
-The `is_good()` method to the `Calendar` class determines whether a date or vector of dates is a business day in a given locale (i.e. city). Some examples of its use are:
+The `is_good()` method determines whether a date or vector of dates is a business day in a given locale (usually a city). Some examples of its use are:
 
 ```{r is_good}
 library("lubridate")
 library("fmdates")
-# ausy <- AUSYCalendar$new()
-# aume <- AUMECalendar$new()
-# syme <- JointCalendar$new(list(ausy, aume), all)
-# ausy$is_good(ymd(20140404))
-# syme$is_good(ymd(20141104)) # Melbourne Cup holiday
-# syme$rule <- any
-# syme$is_good(ymd(20141104))
+ausy <- AUSYCalendar()
+aume <- AUMECalendar()
+syme <- c(ausy, aume) # handy JointCalendar construction approach
+is_good(ymd(20140404), ausy)
+is_good(ymd(20141104), syme) # Melbourne Cup holiday
+syme$rule <- any
+is_good(ymd(20141104), syme)
 ```
 
 ## Bad day adjusters
 
-There are a number of different ways to adjust a bad day to a good day using the `adjust()` method of the `Calendar` class. Some examples include:
+There are a number of different ways to adjust a bad day to a good day using `adjust()`. Some examples include:
 
 ```{r adjust_dates}
-# ausy$adjust(ymd(20140404), 'mf')
-# ausy$adjust(ymd(20141130), 'mf')
-# ausy$adjust(ymd(20141101), 'mp')
-# ausy$adjust(ymd(20141115), 'ms')
+adjust(ymd(20140404), 'mf', ausy)
+adjust(ymd(20141130), 'mf', ausy)
+adjust(ymd(20141101), 'mp', ausy)
+adjust(ymd(20141115), 'ms', ausy)
 ```
 
 ## Shifters
 
-Occasionally it is necessary to shift a date by a certain period or to a certain epoch. The can be done by using the `shift()` method of the `Calendar` class. 
+Occasionally it is necessary to shift a date by a certain period or to a certain epoch. The can be done by using `shift()`. 
 
 ```{r shift_dates}
-# ausy$shift(ymd(20120229), days(2), 'u', FALSE) # two good days
-# ausy$shift(ymd(20120229), months(1), 'u', FALSE) # one month
-# ausy$shift(ymd(20120229), months(1), 'mf', TRUE)  # one month with EOM rule
-# ausy$shift(ymd(20120229), years(1) + months(3), 'mf', TRUE)  # 1y3m
-# ausy$shift(ymd(20120229), hours(1), 'mf', TRUE)  # periods < days ignored. 
+shift(ymd(20120229), days(2), 'u', ausy, FALSE) # two good days
+shift(ymd(20120229), months(1), 'u', ausy, FALSE) # one month
+shift(ymd(20120229), months(1), 'mf', ausy, TRUE)  # one month with EOM rule
+shift(ymd(20120229), years(1) + months(3), 'mf', ausy, TRUE)  # 1y3m
+shift(ymd(20120229), hours(1), 'mf', ausy, TRUE)  # periods < days ignored.
 ```
+
+## Date schedules
+
+With the aforementioned machinery, it is now possible to determine a schedule of dates that are required for a given financial contract. For example, counterparties to a vanilla interest rate swaps exchanged fixed rate payments in return for floating rate payments with regular frequency during the life of the contract. These form payment periods which can be determined using `generate_schedule()`.
+
+```{r schedules}
+# No stub
+generate_schedule(effective_date = ymd(20120103), termination_date = ymd(20130103), 
+  tenor = months(3), calendar = AUSYCalendar(), bdc = "mf", stub = "short_front", 
+  eom_rule = FALSE)
+# Front stub
+generate_schedule(effective_date = ymd(20120103), termination_date = ymd(20121203), 
+  tenor = months(3), calendar = AUSYCalendar(), bdc = "mf", stub = "short_front", 
+  eom_rule = FALSE)
+```
+
 
 ## Day count fractions
 
@@ -79,3 +96,4 @@ It is possible to determine the length of a period. This known as the day count 
 year_frac(ymd("2010-03-31"), ymd("2012-03-31"), "30/360us")
 year_frac(ymd("2010-02-28"), ymd("2012-03-31"), "act/365")
 ```
+

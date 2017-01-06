@@ -21,4 +21,3 @@ library("lubridate")
 is_eom(ymd(20110228)) # TRUE
 is_eom(ymd(20120229)) # TRUE
 }
-

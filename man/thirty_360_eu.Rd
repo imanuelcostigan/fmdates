@@ -25,8 +25,8 @@ ICMA, Eurobond (ISDA 2006) and Special German basis.
 The day count is determined after making the following (ordered)
 modifications:
 \enumerate{
-  \item If the start date is the 31st, set the start date to the 30th
-  \item If the end date is 31st, set the end date to the 30th
+\item If the start date is the 31st, set the start date to the 30th
+\item If the end date is 31st, set the end date to the 30th
 }
 
 The year fraction is then calculated as:
@@ -36,4 +36,3 @@ The order of \code{date1} and \code{date2} is not important. If \code{date1}
 is less than \code{date2} then the result will be non-negative. Otherwise,
 the result will be negative.
 }
-

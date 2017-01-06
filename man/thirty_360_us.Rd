@@ -24,13 +24,13 @@ years consist of 360 calendar days.
 The day count is determined after making the following (ordered)
 modifications:
 \enumerate{
-  \item If both the start and end dates are the last day of February, set
-        the end date to the 30th.
-  \item If the start date is the last day of February, set the start date
-        to the 30th.
-  \item If the end date is the 31st and the start date is either the 30th or
-        the 30th, set the end date to the 30th
-  \item If the start date is the 31st, set the start date to the 30th.
+\item If both the start and end dates are the last day of February, set
+the end date to the 30th.
+\item If the start date is the last day of February, set the start date
+to the 30th.
+\item If the end date is the 31st and the start date is either the 30th or
+the 30th, set the end date to the 30th
+\item If the start date is the 31st, set the start date to the 30th.
 }
 
 The year fraction is then calculated as:
@@ -44,4 +44,3 @@ the result will be negative.
 
 This is also known as the EOM adjusted bond basis.
 }
-

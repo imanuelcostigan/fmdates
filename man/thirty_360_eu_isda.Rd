@@ -27,11 +27,11 @@ and years consist of 360 calendar days. This is also known as the Eurobond
 The day count is determined after making the following (ordered)
 modifications:
 \enumerate{
-  \item If the start date is the last day of the month, set the start date
-         to the 30th
-  \item If the end date is the last day of the month, set the end date to
-         the 30th unless the end date is the maturity date and the end
-         month is February
+\item If the start date is the last day of the month, set the start date
+to the 30th
+\item If the end date is the last day of the month, set the end date to
+the 30th unless the end date is the maturity date and the end
+month is February
 }
 
 The year fraction is then calculated as:
@@ -41,4 +41,3 @@ The order of \code{date1} and \code{date2} is not important. If \code{date1}
 is less than \code{date2} then the result will be non-negative. Otherwise,
 the result will be negative.
 }
-

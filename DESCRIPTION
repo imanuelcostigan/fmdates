@@ -1,7 +1,7 @@
 Package: fmdates
 Type: Package
 Title: Financial Market Date Calculations
-Version: 0.1.0
+Version: 0.0.99
 Author: Imanuel Costigan <i.costigan@me.com>
 Maintainer: Imanuel Costigan <i.costigan@me.com>
 Description: Implements common date calculations relevant for specifying
@@ -17,28 +17,22 @@ Imports:
     utils,
     stats,
     R6,
-    magrittr
-RoxygenNote: 5.0.1
+    magrittr,
+    stats
+RoxygenNote: 5.0.1.9000
+Roxygen: list(markdown = TRUE)
 Suggests:
     testthat,
     knitr,
     rmarkdown
 VignetteBuilder: knitr
 Collate:
+    'calendar-classes.R'
+    'calendar-methods.R'
     'date-methods.R'
-    'date-calendar-classes.R'
-    'date-calendar-au-classes.R'
-    'date-calendar-ch-classes.R'
-    'date-calendar-eu-classes.R'
-    'date-calendar-gb-classes.R'
-    'date-calendar-hk-classes.R'
-    'date-calendar-joint-classes.R'
-    'date-calendar-jp-classes.R'
-    'date-calendar-no-classes.R'
-    'date-calendar-nz-classes.R'
-    'date-calendar-us-classes.R'
     'date-counters.R'
     'date-epochs.R'
     'date-schedule.R'
     'fmdates-package.r'
     'utils.R'
+    'yyy-assertion-helpers.R'

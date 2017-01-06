@@ -1,4 +1,3 @@
-library(lubridate)
 library(testthat)
 library(fmdates)
 

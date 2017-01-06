@@ -14,6 +14,62 @@ knitr::opts_chunk$set(
 
 # fmdates
 
-This package implements common date calculations relevant for specifying the
-economic nature of financial market contracts and typically defined in ISDA
-legal documentation.
+## Motivation
+
+Over-the-counter (OTC) derivatives comprise a significant proportion of trading activity in global financial markets. Their general contractual conventions are specified in what are known as [International Swap and Derivatives Association (ISDA) definitions](http://www.isda.org/publications/isdadefslist.aspx). For example, FX and currency option transactions are governed by the *1998 FX and Currency Options Definitions* and swap transactions are governed by the *2006 ISDA Definitions*. They describe in meticulous detail, among other things, how the dates of certain financial events should be determined. This includes how dates are defined to be good or bad and how bad dates are to be adjusted to good dates. They also define how to determine the length of time between two dates.
+
+This package implements calendars used to define locale specific business days, date adjusters and shifters, schedule generators and year fraction calculations defined by these standards.
+
+
+## Calendars
+
+You can determine whether dates are business days in a specific locale or specific locales:
+
+```{r is_good}
+library("lubridate")
+library("fmdates")
+ausy <- AUSYCalendar()
+aume <- AUMECalendar()
+syme <- c(ausy, aume) # handy JointCalendar construction approach
+is_good(ymd(20140404), ausy)
+is_good(ymd(20141104), syme) # Melbourne Cup holiday
+syme$rule <- any
+is_good(ymd(20141104), syme)
+```
+
+## Adjusters and shifters
+
+You can adjust (or roll) and shift dates using predefined business day conventions:
+
+```{r adjust_shift}
+# Adjust using the modified following convention
+adjust(ymd(20140404), 'mf', ausy)
+# Shift dates
+shift(ymd(20120229), months(1), 'u', ausy, FALSE) # one month
+shift(ymd(20120229), months(1), 'mf', ausy, TRUE)  # one month with EOM rule
+shift(ymd(20120229), years(1) + months(3), 'mf', ausy, TRUE)  # 1y3m
+```
+
+## Schedules
+
+The preceding methods are used to generate schedules of dates required to define common financial contracts events such as cash flow exchange dates:
+
+```{r schedules}
+generate_schedule(effective_date = ymd(20120103), termination_date = ymd(20130103), 
+  tenor = months(3), calendar = ausy, bdc = "mf", stub = "short_front", 
+  eom_rule = FALSE)
+```
+
+
+## Year fractions
+
+Time lengths then usually need to be computed for each interval of such a schedule according to some day basis convention:
+
+```{r year_frac}
+# 30/360us convention
+year_frac(ymd("2010-03-31"), ymd("2012-03-31"), "30/360us")
+# act/365 convention
+year_frac(ymd("2010-02-28"), ymd("2012-03-31"), "act/365")
+```
+
+More details can be found in the associated help files and the vignette (`vignette("dates", "fmdates")`)

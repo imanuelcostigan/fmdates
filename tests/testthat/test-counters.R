@@ -1,6 +1,6 @@
 context("Counters")
 
-library(lubridate)
+suppressPackageStartupMessages(library(lubridate))
 
 test_that("year_frac works as expected", {
   expect_equal(year_frac(ymd("20100331"), ymd("20120331"), "30/360us"), 2.00000000000000000000, tolerance=1e20)
