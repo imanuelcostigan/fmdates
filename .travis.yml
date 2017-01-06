@@ -9,11 +9,14 @@ after_success:
 matrix:
   include:
     - os: linux
-      r:
-        - oldrel
-        - release
-        - devel
+      r: oldrel
     - os: linux
+      r: release
+    - os:
+      r: devel
+    - os: linux
+      r: release
       env: R_CODECOV=true
     - os: osx
+      r: release
       osx_image: xcode8.2
