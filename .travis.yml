@@ -12,11 +12,9 @@ matrix:
       r: oldrel
     - os: linux
       r: release
+      env: R_CODECOV=true
     - os:
       r: devel
-    - os: linux
-      r: release
-      env: R_CODECOV=true
     - os: osx
       r: release
       osx_image: xcode8.2
