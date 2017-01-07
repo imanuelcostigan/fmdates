@@ -36,3 +36,5 @@ Collate:
     'fmdates-package.r'
     'utils.R'
     'yyy-assertion-helpers.R'
+URL: https://github.com/imanuelcostigan/fmdates
+BugReports: https://github.com/imanuelcostigan/fmdates/issues
