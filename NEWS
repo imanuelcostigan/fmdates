@@ -1,4 +1,4 @@
-Changes in version 0.1
+Changes in version 0.1.0
 
 - Initial release
 - Introduces `Calendar` classes (S3) and associated convenience constructors for
