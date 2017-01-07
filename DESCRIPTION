@@ -6,7 +6,9 @@ Author: Imanuel Costigan <i.costigan@me.com>
 Maintainer: Imanuel Costigan <i.costigan@me.com>
 Description: Implements common date calculations relevant for specifying
     the economic nature of financial market contracts that are typically defined 
-    by International Swap Dealer Association (ISDA) legal documentation.
+    by International Swap Dealer Association (ISDA) legal documentation. This 
+    includes methods to check whether dates are business days in certain locales,
+    functions to adjust and shift dates and time length (or day counter) calculations.
 License: GPL-2
 Encoding: UTF-8
 LazyData: true

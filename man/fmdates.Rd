@@ -7,6 +7,11 @@
 \title{fmdates}
 \description{
 Implements common date calculations relevant for specifying the economic
-nature of financial market contracts and typically defined in ISDA legal
-documentation.
+nature of financial market contracts that are typically defined by
+International Swap Dealer Association (ISDA) legal documentation.
+}
+\details{
+The key classes and methods introduced by this package are documented in
+\code{\link{Calendar}}, \code{\link{JointCalendar}}, \code{\link[=is_good]{is_good()}}, \code{\link[=adjust]{adjust()}}, \code{\link[=shift]{shift()}} and
+\code{\link[=year_frac]{year_frac()}}.
 }
