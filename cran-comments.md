@@ -1,3 +1,7 @@
+## Update
+
+Added ISDA URL to DESCRIPTION following Kurt's request.
+
 ## Test environments
 
 * travis-ci based ubuntu 12.04 running R 3.2.5, 3.3.1 and r71861 
