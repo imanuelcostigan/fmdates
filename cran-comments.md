@@ -6,7 +6,11 @@
 
 ## R CMD check results
 
-0 errors | 0 warnings | 0 note
+0 errors | 0 warnings | 1 note
+
+Note relates to introduction of an abbreviation used in DESCRIPTION and 
+invalid CRAN badge URL in README.md (which obviously won't exist until after this
+submission is accepted)
 
 * This is a new release.
 
