@@ -60,4 +60,20 @@ test_that("Schedule generator works:", {
     tz = "UTC")
   expect_identical(int_start(s), utils::head(res, -1))
   expect_identical(int_end(s), utils::tail(res, -1))
+
+  # Change stub type to long
+  s <- generate_schedule(d1, d2, months(3), AUSYCalendar(), "u",
+    "long_back", TRUE)
+  res <- ymd(20111130, 20120229, 20120531, 20120831, 20121230, tz = "UTC")
+  expect_identical(int_start(s), utils::head(res, -1))
+  expect_identical(int_end(s), utils::tail(res, -1))
+
+  # Change stub type to long front
+  d1 <- ymd(20120103)
+  d2 <- ymd(20121203)
+  s <- generate_schedule(d1, d2, months(3), AUSYCalendar(), "mf",
+    "long_front", FALSE)
+  res <- ymd(20120103, 20120604, 20120903, 20121203, tz = "UTC")
+  expect_identical(int_start(s), utils::head(res, -1))
+  expect_identical(int_end(s), utils::tail(res, -1))
 })

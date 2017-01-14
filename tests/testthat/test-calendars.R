@@ -2,6 +2,11 @@ context("Calendars")
 
 suppressPackageStartupMessages(library("lubridate"))
 
+test_that("Empty calendar is correct", {
+  expect_identical(res <- is_good(ymd(20170101) + days(0:365), EmptyCalendar()),
+    rep_len(TRUE, length(res)))
+})
+
 test_that('Sydney calendar is correct', {
   # Source: http://www.industrialrelations.nsw.gov.au/oirwww/NSW_public_holidays/NSW_Public_Holidays_2013-2015.page
   syd_hol_2013 <- ymd(20130101, 20130128, 20130329, 20130330,
@@ -266,44 +271,3 @@ test_that("Joint calendars work effectively", {
     JointCalendar(list(AUSYCalendar())))
   expect_equal(syme[2], JointCalendar(list(AUMECalendar()), any))
 })
-
-context("Adjusters")
-
-test_that("Adjust method works as expected", {
-  ausy <- AUSYCalendar()
-  gblo <- GBLOCalendar()
-  sylo <- JointCalendar(list(ausy, gblo), all)
-  expect_identical(adjust(ymd("20120102"), "u", ausy), ymd("20120102"))
-  expect_identical(adjust(ymd("20120102"), "f", ausy), ymd("20120103"))
-  expect_identical(adjust(ymd("20120331"), "mf", ausy), ymd("20120330"))
-  expect_identical(adjust(ymd("20120102"), "p", ausy), ymd("20111230"))
-  expect_identical(adjust(ymd("20120102"), "mp", ausy), ymd("20120103"))
-  expect_identical(adjust(ymd("20120115"), "ms", ausy), ymd("20120113"))
-  expect_identical(adjust(ymd("20121225"), "mf", sylo), ymd("20121227"))
-})
-
-
-context("Shifters")
-
-test_that("Shift method works as expected", {
-  ausy <- AUSYCalendar()
-  expect_identical(shift(ymd("20120229"), months(1), "u", ausy, FALSE), ymd("20120329"))
-  expect_identical(shift(ymd("20120228"), months(1), "u", ausy, FALSE), ymd("20120328"))
-  expect_identical(shift(ymd("20120331"), months(1), "u", ausy, FALSE), ymd("20120430"))
-  expect_identical(shift(ymd("20120229"), years(1), "u", ausy, FALSE), ymd("20130228"))
-  expect_identical(shift(ymd("20120229"), months(1), "u", ausy, TRUE), ymd("20120330"))
-  expect_identical(shift(ymd("20120229"), years(1), "u", ausy, FALSE), ymd("20130228"))
-  expect_identical(shift(ymd("20120229"), years(1), "u", ausy, TRUE), ymd("20130228"))
-  expect_identical(shift(ymd("20120424"), days(1), "u", ausy, TRUE), ymd("20120426"))
-  expect_identical(shift(ymd("20120430"), months(1), "u", ausy, FALSE), ymd("20120530"))
-  expect_identical(shift(ymd("20120430"), months(1), "u", ausy, TRUE), ymd("20120531"))
-  expect_identical(shift(ymd("20120331"), months(1), "u", ausy, FALSE), ymd("20120430"))
-  expect_identical(shift(ymd("20120331"), months(1), "u", ausy, TRUE), ymd("20120430"))
-  expect_identical(shift(ymd("20121225"), days(10), "mf", ausy, TRUE), ymd("20130110"))
-  expect_identical(shift(ymd(20110429), months(1), 'mf', ausy, TRUE), ymd(20110531))
-  expect_identical(shift(ymd("20120601"), years(1) - days(1), "mf", ausy, FALSE), ymd("20130531"))
-  gblo <- GBLOCalendar()
-  expect_identical(shift(ymd("20151127"), days(-2), "mf", gblo, TRUE), ymd("20151125"))
-  expect_identical(shift(ymd("20151127"), days(2), "mf", gblo, TRUE), ymd("20151201"))
-})
-
