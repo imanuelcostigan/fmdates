@@ -100,7 +100,8 @@ shift <- function(dates, period, bdc = "u", calendar = EmptyCalendar(),
   eom_rule = TRUE) {
   # Period should have length one (but might have multiple period types
   # in this)
-  assertthat::assert_that(assertthat::is.scalar(period))
+  assertthat::assert_that(assertthat::is.scalar(period),
+    is_valid_bdc(bdc))
 
   # Figure out which period types to loop
   ps <- methods::slotNames(period)
