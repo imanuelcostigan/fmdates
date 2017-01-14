@@ -3,7 +3,7 @@
 fmdates
 =======
 
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/fmdates)](https://cran.r-project.org/package=fmdates) [![Travis build status](https://travis-ci.org/imanuelcostigan/fmdates.svg?branch=master)](https://travis-ci.org/imanuelcostigan/fmdates) [![Appveyor build status](https://ci.appveyor.com/api/projects/status/i8io32eoft5rsb6n/branch/master?svg=true)](https://ci.appveyor.com/project/imanuelcostigan/fmdates/branch/master) [![Coverage Status](https://img.shields.io/codecov/c/github/imanuelcostigan/fmdates/master.svg)](https://codecov.io/github/imanuelcostigan/fmdates?branch=master)
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/fmdates)](https://cran.r-project.org/package=fmdates) [![License](https://img.shields.io/badge/license-GPL--2-blue.svg)](http://choosealicense.com/licenses/gpl-2.0/) [![Travis build status](https://travis-ci.org/imanuelcostigan/fmdates.svg?branch=master)](https://travis-ci.org/imanuelcostigan/fmdates) [![Appveyor build status](https://ci.appveyor.com/api/projects/status/i8io32eoft5rsb6n/branch/master?svg=true)](https://ci.appveyor.com/project/imanuelcostigan/fmdates/branch/master) [![Coverage Status](https://img.shields.io/codecov/c/github/imanuelcostigan/fmdates/master.svg)](https://codecov.io/github/imanuelcostigan/fmdates?branch=master)
 
 Motivation
 ----------
