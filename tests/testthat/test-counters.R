@@ -34,6 +34,7 @@ test_that("year_frac works as expected", {
   expect_equal(year_frac(ymd("20100331"), ymd("20110331"), "30/360"), 1.0)
   expect_equal(year_frac(ymd("20100330"), ymd("20110331"), "30/360"), 1.0)
   expect_equal(year_frac(ymd("20100315"), ymd("20110315"), "30/360"), 1.0)
+  expect_equal(year_frac(ymd("20110315"), ymd("20100315"), "30/360"), -1.0)
 })
 
 test_that('year_frac deals with NAs appropriately', {

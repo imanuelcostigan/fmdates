@@ -271,3 +271,16 @@ test_that("Joint calendars work effectively", {
     JointCalendar(list(AUSYCalendar())))
   expect_equal(syme[2], JointCalendar(list(AUMECalendar()), any))
 })
+
+test_that("Concatention works", {
+  expect_is(c(AUSYCalendar(), AUMECalendar()), "JointCalendar")
+  expect_is(c(c(AUSYCalendar(), AUMECalendar()), USNYCalendar()), "JointCalendar")
+  expect_is(c(USNYCalendar(), c(AUSYCalendar(), AUMECalendar())), "JointCalendar")
+})
+
+test_that("Calendar checkers", {
+  expect_true(is.Calendar(EmptyCalendar()))
+  expect_false(is.JointCalendar(EmptyCalendar()))
+  expect_true(is.JointCalendar(c(AUSYCalendar(), AUMECalendar())))
+  expect_false(is.Calendar(c(AUSYCalendar(), AUMECalendar())))
+})
