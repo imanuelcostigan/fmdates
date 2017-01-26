@@ -278,6 +278,17 @@ test_that("Concatention works", {
   expect_is(c(USNYCalendar(), c(AUSYCalendar(), AUMECalendar())), "JointCalendar")
 })
 
+
+test_that("Subsetting works", {
+  syny <- c(AUSYCalendar(), USNYCalendar())
+  expect_equal(syny[1], c(AUSYCalendar()))
+  expect_equal(syny[2], c(USNYCalendar()))
+  expect_equal(syny[1:2], syny)
+  expect_equal(syny[c(TRUE, FALSE)], syny[1])
+  expect_equal(syny[c(FALSE, TRUE)], syny[2])
+  expect_equal(syny[c(TRUE, TRUE)], syny)
+})
+
 test_that("Calendar checkers", {
   expect_true(is.Calendar(EmptyCalendar()))
   expect_false(is.JointCalendar(EmptyCalendar()))

@@ -520,10 +520,7 @@ c.JointCalendar <- function(..., recursive = FALSE) {
 
 #' @export
 `[.JointCalendar` <- function (x, i) {
-  assertthat::assert_that(assertthat::is.number(i))
-  if (i <= length(x)) {
-    JointCalendar(list(Calendar(locale(x)[i], tz(x)[i])()), x$rule)
-  } else NA
+  JointCalendar(x$calendars[i], x$rule)
 }
 
 #' @export
