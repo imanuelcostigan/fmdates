@@ -1,5 +1,6 @@
 Changes in version 0.1.0-99
 
+- Fixed error when subsetting a `JointCalendar` with a logical vector (#3)
 - Removed unnecessary dependency on stats package
 
 Changes in version 0.1.0
