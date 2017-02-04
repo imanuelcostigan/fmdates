@@ -1,3 +1,7 @@
+## Update
+
+Resubmitted after making changes requested by Uwe.
+
 ## Test environments
 
 * travis-ci based ubuntu 12.04 running R 3.2.5, 3.3.2 and r72035 
