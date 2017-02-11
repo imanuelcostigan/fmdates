@@ -460,6 +460,22 @@ year_frac <- function(date1, date2, day_basis, maturity_date = NULL)
   yrs
 }
 
+#' Day basis conventions
+#'
+#' Checks whether day basis conventions are valid. Supported day basis
+#' conventions are documented in [year_frac()]
+#'
+#' @param day_basis A character vector of day basis conventions.
+#' @return will return `TRUE` for `day_basis` elements that are any of the
+#'   following: \code{30/360}, \code{30/360us}, \code{30e/360},
+#'   \code{30e/360isda}, \code{30e+/360}, \code{act/360}, \code{act/365} and
+#'   \code{act/actisda}. Otherwise will return `FALSE`
+#' @export
+#' @examples
+#' is_valid_day_basis(c("act/360", "act/365f"))
+#' @aliases daybasisconventions
+#' @family counter methods
+
 is_valid_day_basis <- function (day_basis) {
   DAY_BASIS <- c("30/360us", "30e/360", "30e/360isda", "30e+/360",
     "act/360",  "act/365", "act/actisda", "30/360")

@@ -607,7 +607,7 @@ extract_atoms <- function (dates, calendar) {
 #' day conventions are supported.
 #' @aliases businessdayconventions
 #' @family calendar methods
-#' @keywords internal
+#' @export
 
 is_valid_bdc <- function (bdc) {
   all(bdc %in% c('u', 'f', 'mf', 'p', 'mp', 'ms'))
