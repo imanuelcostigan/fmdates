@@ -13,10 +13,8 @@ class.}
 \item{date2}{A vector of dates. This will be coerced to a \code{\link{Date}}
 class.}
 
-\item{day_basis}{The basis on which the year fraction is calculated. Valid
-day basis are \code{30/360}, \code{30/360us}, \code{30e/360},
-\code{30e/360isda}, \code{30e+/360}, \code{act/360}, \code{act/365} and
-\code{act/actisda}. Others may be added later.}
+\item{day_basis}{The basis on which the year fraction is calculated. See
+\code{\link[=is_valid_day_basis]{is_valid_day_basis()}}}
 
 \item{maturity_date}{a vector of dates representing the maturity date of
 the instrument. Only used for 30E/360 ISDA day basis.}
@@ -47,8 +45,12 @@ year_frac(ymd("2010-02-28"), ymd("2012-03-31"), "act/actisda")  # 2.086998
 \url{http://en.wikipedia.org/wiki/Day_count_convention}
 }
 \seealso{
-\code{\link{thirty_360}}, \code{\link{thirty_360_us}},
-\code{\link{thirty_360_eu}}, \code{\link{thirty_360_eu_isda}},
-\code{\link{thirty_360_eu_plus}}, \code{\link{actual_360}},
-\code{\link{actual_365}}, \code{\link{actual_actual_isda}}.
+Other counter methods: \code{\link{actual_360}},
+  \code{\link{actual_365}},
+  \code{\link{actual_actual_isda}},
+  \code{\link{is_valid_day_basis}},
+  \code{\link{thirty_360_eu_isda}},
+  \code{\link{thirty_360_eu_plus}},
+  \code{\link{thirty_360_eu}}, \code{\link{thirty_360_us}},
+  \code{\link{thirty_360}}
 }

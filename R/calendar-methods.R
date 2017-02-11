@@ -580,8 +580,7 @@ extract_atoms <- function (dates, calendar) {
 
 #' Business day conventions
 #'
-#' A non-exported function for checking whether business day conventions
-#' are valid.
+#' Checks whether business day conventions are valid.
 #'
 #' The supported day conventions are:
 #' \itemize{
