@@ -1,7 +1,3 @@
-## Update
-
-Resubmitted after making changes requested by Uwe.
-
 ## Test environments
 
 * travis-ci based ubuntu 12.04 running R 3.2.5, 3.3.2 and r72035 
@@ -14,7 +10,7 @@ Resubmitted after making changes requested by Uwe.
 
 Note relates to abbreviation used in DESCRIPTION which is expanded.
 
-* This is a minor bug fix update
+* This is a minor update which exports two additional functions
 
 ## Reverse dependencies
 
