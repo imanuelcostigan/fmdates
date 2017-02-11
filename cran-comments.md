@@ -1,8 +1,8 @@
 ## Test environments
 
-* travis-ci based ubuntu 12.04 running R 3.2.5, 3.3.2 and r72035 
+* travis-ci based ubuntu 12.04 running R 3.2.5, 3.3.2 and r72156 
 * travis-ci based macOS 10.12 running R 3.3.2
-* appveyor based Windows 3.3.2 patched (r72026)
+* appveyor based Windows 3.3.2 patched (r72142)
 
 ## R CMD check results
 
