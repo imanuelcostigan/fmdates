@@ -1,3 +1,7 @@
+Changes in version 0.1.2
+
+- Exported `is_valid_day_basis()` and `is_valid_bdc()` (#5)
+
 Changes in version 0.1.1
 
 - Fixed error when subsetting a `JointCalendar` with a logical vector (#3)

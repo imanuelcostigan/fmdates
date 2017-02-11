@@ -29,4 +29,13 @@ The order of \code{date1} and \code{date2} is not important. If \code{date1}
 is less than \code{date2} then the result will be non-negative. Otherwise,
 the result will be negative.
 }
+\seealso{
+Other counter methods: \code{\link{actual_365}},
+  \code{\link{actual_actual_isda}},
+  \code{\link{is_valid_day_basis}},
+  \code{\link{thirty_360_eu_isda}},
+  \code{\link{thirty_360_eu_plus}},
+  \code{\link{thirty_360_eu}}, \code{\link{thirty_360_us}},
+  \code{\link{thirty_360}}, \code{\link{year_frac}}
+}
 \keyword{internal}

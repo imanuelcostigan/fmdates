@@ -15,8 +15,7 @@ a flag (\code{TRUE} or \code{FALSE}) if all the supplied business
 day conventions are supported.
 }
 \description{
-A non-exported function for checking whether business day conventions
-are valid.
+Checks whether business day conventions are valid.
 }
 \details{
 The supported day conventions are:
@@ -44,4 +43,3 @@ Other calendar methods: \code{\link{adjust}},
   \code{\link{is}}, \code{\link{locale}},
   \code{\link{shift}}, \code{\link{tz}}
 }
-\keyword{internal}

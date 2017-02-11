@@ -28,6 +28,7 @@
 #' @return A numeric value representing the number of years between
 #' \code{date1} and \code{date2}.
 #' @keywords internal
+#' @family counter methods
 
 thirty_360 <- function (date1, date2) {
   if (identical(date1, date2)) return (0)
@@ -81,7 +82,7 @@ thirty_360 <- function (date1, date2) {
 #' @return A numeric value representing the number of years between
 #' \code{date1} and \code{date2}.
 #' @keywords internal
-
+#' @family counter methods
 thirty_360_us <- function (date1, date2)
 {
   if (identical(date1, date2)) return (0)
@@ -135,7 +136,7 @@ thirty_360_us <- function (date1, date2)
 #' @return a numeric value representing the number of years between
 #' \code{date1} and \code{date2}.
 #' @keywords internal
-
+#' @family counter methods
 thirty_360_eu <- function (date1, date2)
 {
   dd1 <- lubridate::mday(date1)/1
@@ -183,7 +184,7 @@ thirty_360_eu <- function (date1, date2)
 #' @return a numeric value representing the number of years between
 #' \code{date1} and \code{date2}.
 #' @keywords internal
-
+#' @family counter methods
 thirty_360_eu_isda <- function (date1, date2, maturity_date)
 {
   dd1 <- lubridate::mday(date1)/1
@@ -230,7 +231,7 @@ thirty_360_eu_isda <- function (date1, date2, maturity_date)
 #' @return a numeric value representing the number of years between
 #' \code{date1} and \code{date2}.
 #' @keywords internal
-
+#' @family counter methods
 thirty_360_eu_plus <- function (date1, date2)
 {
   dd1 <- lubridate::mday(date1)/1
@@ -270,7 +271,7 @@ thirty_360_eu_plus <- function (date1, date2)
 #' @return a numeric value representing the number of years between
 #' \code{date1} and \code{date2}.
 #' @keywords internal
-
+#' @family counter methods
 actual_360 <- function (date1, date2) {
   as.numeric(date2 - date1) / 360
 }
@@ -297,7 +298,7 @@ actual_360 <- function (date1, date2) {
 #' @return a numeric value representing the number of years between
 #' \code{date1} and \code{date2}.
 #' @keywords internal
-
+#' @family counter methods
 actual_365 <- function (date1, date2) {
   as.numeric(date2 - date1) / 365
 }
@@ -336,7 +337,7 @@ actual_365 <- function (date1, date2) {
 #' @return a numeric value representing the number of years between
 #' \code{date1} and \code{date2}.
 #' @keywords internal
-
+#' @family counter methods
 actual_actual_isda <- function (date1, date2)
 {
   dib1 <- vector("numeric", NROW(date1))
@@ -371,18 +372,12 @@ actual_actual_isda <- function (date1, date2)
 #' class.
 #' @param date2 A vector of dates. This will be coerced to a \code{\link{Date}}
 #' class.
-#' @param day_basis The basis on which the year fraction is calculated. Valid
-#'   day basis are \code{30/360}, \code{30/360us}, \code{30e/360},
-#'   \code{30e/360isda}, \code{30e+/360}, \code{act/360}, \code{act/365} and
-#'   \code{act/actisda}. Others may be added later.
+#' @param day_basis The basis on which the year fraction is calculated. See
+#' [is_valid_day_basis()]
 #' @param maturity_date a vector of dates representing the maturity date of
 #' the instrument. Only used for 30E/360 ISDA day basis.
 #' @return a numeric vector representing the number of years between
 #' \code{date1} and \code{date2}.
-#' @seealso \code{\link{thirty_360}}, \code{\link{thirty_360_us}},
-#'   \code{\link{thirty_360_eu}}, \code{\link{thirty_360_eu_isda}},
-#'   \code{\link{thirty_360_eu_plus}}, \code{\link{actual_360}},
-#'   \code{\link{actual_365}}, \code{\link{actual_actual_isda}}.
 #' @examples
 #' require(lubridate)
 #' year_frac(ymd("2010-03-31"), ymd("2012-03-31"), "30/360us") # 2
@@ -390,6 +385,7 @@ actual_actual_isda <- function (date1, date2)
 #' year_frac(ymd("2010-02-28"), ymd("2012-03-31"), "act/365")  # 2.087671
 #' year_frac(ymd("2010-02-28"), ymd("2012-03-31"), "act/actisda")  # 2.086998
 #' @references \url{http://en.wikipedia.org/wiki/Day_count_convention}
+#' @family counter methods
 #' @export
 
 year_frac <- function(date1, date2, day_basis, maturity_date = NULL)
@@ -460,8 +456,23 @@ year_frac <- function(date1, date2, day_basis, maturity_date = NULL)
   yrs
 }
 
+#' Day basis conventions
+#'
+#' Checks whether day basis conventions are valid. Supported day basis
+#' conventions are documented in [year_frac()]
+#'
+#' @param day_basis A character vector of day basis conventions.
+#' @return will return `TRUE` for `day_basis` elements that are any of the
+#'   following: \code{30/360}, \code{30/360us}, \code{30e/360},
+#'   \code{30e/360isda}, \code{30e+/360}, \code{act/360}, \code{act/365} and
+#'   \code{act/actisda}. Otherwise will return `FALSE`
+#' @export
+#' @examples
+#' is_valid_day_basis(c("act/360", "act/365f"))
+#' @aliases daybasisconventions
+#' @family counter methods
+
 is_valid_day_basis <- function (day_basis) {
-  DAY_BASIS <- c("30/360us", "30e/360", "30e/360isda", "30e+/360",
-    "act/360",  "act/365", "act/actisda", "30/360")
-  all(day_basis %in% DAY_BASIS)
+  all(day_basis %in% c("30/360us", "30e/360", "30e/360isda", "30e+/360",
+    "act/360",  "act/365", "act/actisda", "30/360"))
 }

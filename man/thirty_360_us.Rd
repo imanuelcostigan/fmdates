@@ -44,4 +44,14 @@ the result will be negative.
 
 This is also known as the EOM adjusted bond basis.
 }
+\seealso{
+Other counter methods: \code{\link{actual_360}},
+  \code{\link{actual_365}},
+  \code{\link{actual_actual_isda}},
+  \code{\link{is_valid_day_basis}},
+  \code{\link{thirty_360_eu_isda}},
+  \code{\link{thirty_360_eu_plus}},
+  \code{\link{thirty_360_eu}}, \code{\link{thirty_360}},
+  \code{\link{year_frac}}
+}
 \keyword{internal}
