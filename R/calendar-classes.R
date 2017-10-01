@@ -26,50 +26,62 @@
 #' @family calendar classes
 
 Calendar <- function(locale, tz) {
-  assertthat::assert_that(assertthat::is.string(locale) || is.na(locale),
-    assertthat::is.string(tz) || is.na(tz))
-  function () {
-    structure(list(locale = locale, tz = tz),
-      class = c(paste0(locale, "Calendar"), "Calendar"))
-  }
+  validate_Calendar(new_Calendar(locale, tz))
+}
+
+new_Calendar <- function(locale, tz) {
+  structure(
+    list(
+      locale = locale,
+      tz = tz
+    ), class = c(paste0(locale, "Calendar"), "Calendar")
+  )
+}
+
+validate_Calendar <- function(x) {
+  assertthat::assert_that(
+    assertthat::is.string(x$locale) || is.na(x$locale),
+    assertthat::is.string(x$tz) || is.na(x$tz)
+  )
+  x
 }
 
 #' @rdname Calendar
 #' @export
-EmptyCalendar <- Calendar(NA, NA)
+EmptyCalendar <- function() Calendar(NA, NA)
 #' @rdname Calendar
 #' @export
-AUSYCalendar <- Calendar("AUSY", "Australia/Sydney")
+AUSYCalendar <- function() Calendar("AUSY", "Australia/Sydney")
 #' @rdname Calendar
 #' @export
-AUMECalendar <- Calendar("AUME", "Australia/Melbourne")
+AUMECalendar <- function() Calendar("AUME", "Australia/Melbourne")
 #' @rdname Calendar
 #' @export
-CHZHCalendar <- Calendar("CHZH", "Europe/Zurich")
+CHZHCalendar <- function() Calendar("CHZH", "Europe/Zurich")
 #' @rdname Calendar
 #' @export
-EUTACalendar <- Calendar("EUTA", "Europe/Brussels")
+EUTACalendar <- function() Calendar("EUTA", "Europe/Brussels")
 #' @rdname Calendar
 #' @export
-GBLOCalendar <- Calendar("GBLO", "Europe/London")
+GBLOCalendar <- function() Calendar("GBLO", "Europe/London")
 #' @rdname Calendar
 #' @export
-HKHKCalendar <- Calendar("HKHK", "Asia/Hong_Kong")
+HKHKCalendar <- function() Calendar("HKHK", "Asia/Hong_Kong")
 #' @rdname Calendar
 #' @export
-JPTOCalendar <- Calendar("JPTO", "Asia/Tokyo")
+JPTOCalendar <- function() Calendar("JPTO", "Asia/Tokyo")
 #' @rdname Calendar
 #' @export
-NOOSCalendar <- Calendar("NOOS", "Europe/Oslo")
+NOOSCalendar <- function() Calendar("NOOS", "Europe/Oslo")
 #' @rdname Calendar
 #' @export
-NZAUCalendar <- Calendar("NZAU", "Pacific/Auckland")
+NZAUCalendar <- function() Calendar("NZAU", "Pacific/Auckland")
 #' @rdname Calendar
 #' @export
-NZWECalendar <- Calendar("NZWE", "Pacific/Auckland")
+NZWECalendar <- function() Calendar("NZWE", "Pacific/Auckland")
 #' @rdname Calendar
 #' @export
-USNYCalendar <- Calendar("USNY", "America/New_York")
+USNYCalendar <- function() Calendar("USNY", "America/New_York")
 
 
 #' Joint calendars
