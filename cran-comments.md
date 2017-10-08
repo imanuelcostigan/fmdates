@@ -1,17 +1,17 @@
+## Summary
+
+* Minor change to ensure compatibility with upcoming release of `lubridate`
+
 ## Test environments
 
-* travis-ci based ubuntu 12.04 running R 3.2.5, 3.3.2 and r72156 
-* travis-ci based macOS 10.12 running R 3.3.2
-* appveyor based Windows 3.3.2 patched (r72142)
+* travis-ci based ubuntu 14.04 running R 3.3.3, 3.4.1 and r73497 
+* travis-ci based macOS 10.12.1 running R 3.4.2
+* appveyor based Windows Server 2012 R2 x64 running 3.4.2 patched (r73475)
 
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
-
-Note relates to abbreviation used in DESCRIPTION which is expanded.
-
-* This is a minor update which exports two additional functions
+0 errors | 0 warnings | 0 note
 
 ## Reverse dependencies
 
-There are no reverse dependencies
+Reverse dependencies do not throw errors, warnings or notes.
