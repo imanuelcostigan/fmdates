@@ -13,8 +13,10 @@ install:
 cache:
   - C:\RLibrary
 
-environment:  # Needed for install_github() to compile code
-  - USE_RTOOLS: true
+# Needed for install_github() to compile code
+environment:
+  global:
+    - USE_RTOOLS: true
 
 # Adapt as necessary starting from here
 
