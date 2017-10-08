@@ -14,7 +14,7 @@ License: GPL-2
 Encoding: UTF-8
 LazyData: true
 Imports:
-  lubridate (>= 1.6.0.9000),
+  lubridate (>= 1.6.0),
   assertthat,
   methods,
   utils
@@ -23,8 +23,6 @@ Suggests:
   knitr,
   rmarkdown,
   covr
-Remotes:
-  tidyverse/lubridate@2c3862717
 RoxygenNote: 6.0.1
 Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr
