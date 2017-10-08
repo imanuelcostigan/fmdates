@@ -17,7 +17,7 @@ a numeric value representing the number of years between
 }
 \description{
 This calculates the years between two dates using the actual/360 day basis
-convention. This convention counts the number of calendars beween the start
+convention. This convention counts the number of calendars between the start
 and end dates and assumes a year consists of 360 days. This is also known
 as the A/360, Act/360 or French day basis convention.
 }
