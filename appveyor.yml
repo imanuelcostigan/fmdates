@@ -16,7 +16,7 @@ cache:
 # Needed for install_github() to compile code
 environment:
   global:
-    - USE_RTOOLS: true
+    USE_RTOOLS: true
 
 # Adapt as necessary starting from here
 
