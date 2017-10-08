@@ -18,23 +18,13 @@ Imports:
   assertthat,
   methods,
   utils
-RoxygenNote: 6.0.1
-Roxygen: list(markdown = TRUE)
 Suggests:
   testthat,
   knitr,
   rmarkdown,
   covr
+RoxygenNote: 6.0.1
+Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr
-Collate:
-  'calendar-classes.R'
-  'calendar-methods.R'
-  'date-methods.R'
-  'date-counters.R'
-  'date-epochs.R'
-  'date-schedule.R'
-  'fmdates-package.r'
-  'utils.R'
-  'yyy-assertion-helpers.R'
 URL: https://github.com/imanuelcostigan/fmdates
 BugReports: https://github.com/imanuelcostigan/fmdates/issues
