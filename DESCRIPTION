@@ -1,7 +1,7 @@
 Package: fmdates
 Type: Package
 Title: Financial Market Date Calculations
-Version: 0.1.2
+Version: 0.1.2-99
 Author: Imanuel Costigan <i.costigan@me.com>
 Maintainer: Imanuel Costigan <i.costigan@me.com>
 Description: Implements common date calculations relevant for specifying
@@ -14,27 +14,19 @@ License: GPL-2
 Encoding: UTF-8
 LazyData: true
 Imports:
-  lubridate (>= 1.6.0),
+  lubridate (>= 1.6.0.9000),
   assertthat,
   methods,
   utils
-RoxygenNote: 6.0.1
-Roxygen: list(markdown = TRUE)
 Suggests:
   testthat,
   knitr,
   rmarkdown,
   covr
+Remotes:
+  tidyverse/lubridate@2c3862717
+RoxygenNote: 6.0.1
+Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr
-Collate:
-  'calendar-classes.R'
-  'calendar-methods.R'
-  'date-methods.R'
-  'date-counters.R'
-  'date-epochs.R'
-  'date-schedule.R'
-  'fmdates-package.r'
-  'utils.R'
-  'yyy-assertion-helpers.R'
 URL: https://github.com/imanuelcostigan/fmdates
 BugReports: https://github.com/imanuelcostigan/fmdates/issues
