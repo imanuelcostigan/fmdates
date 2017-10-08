@@ -1,3 +1,7 @@
+Changes in version 0.1.2-99
+
+- `is_good()` methods work when dates are bad and they occur on Tuesdays or Wednesdays following changes to `lubridate::wday()` return values (#7)
+
 Changes in version 0.1.2
 
 - Exported `is_valid_day_basis()` and `is_valid_bdc()` (#5)
