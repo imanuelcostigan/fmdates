@@ -1,3 +1,7 @@
+Changes in version 0.1.3-99
+
+- `is_good()` no longer relies on `lubridate::wday()` abbreviations (#9)
+
 Changes in version 0.1.3
 
 - `is_good()` methods work when dates are bad and they occur on Tuesdays or Thursdays following changes to `lubridate::wday()` return values (#7)
