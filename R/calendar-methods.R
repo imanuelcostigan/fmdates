@@ -52,17 +52,16 @@ is_good.AUSYCalendar <- function(dates, calendar) {
   # Weekend
   !(a$wd == 1 | a$wd == 7 |
       # New Years. Next weekday a  holiday if NY falls on W/E.
-      ((a$dom == 1 | ((a$dom == 2 | a$dom == 3) & a$dow == 'Mon')) &
+      ((a$dom == 1 | ((a$dom == 2 | a$dom == 3) & a$dow == 1)) &
           a$m == 1) |
       # Australia Day. Next weekday a holiday if Aus Day falls on W/E.
-      ((a$dom == 26 | ((a$dom == 27 | a$dom == 28) & a$dow == 'Mon')) &
+      ((a$dom == 26 | ((a$dom == 27 | a$dom == 28) & a$dow == 1)) &
           a$m == 1) |
       # ANZAC day. Substitute not legislated, but generally given
-      ((a$dom == 25 | ((a$dom == 26 | a$dom == 27) & a$dow == 'Mon')) &
+      ((a$dom == 25 | ((a$dom == 26 | a$dom == 27) & a$dow == 1)) &
           a$m == 4) |
       # Christmas. Substitute generally given
-      ((a$dom == 25 | (a$dom == 27 & (a$dow == 'Mon' |
-          strtrim(a$dow, 3) == 'Tue'))) & a$m == 12) |
+      ((a$dom == 25 | (a$dom == 27 & (a$dow == 1 | a$dow == 2))) & a$m == 12) |
       # Easter holidays
       #### TODO:
       #### NEED TO FIX CASE WHEN EASTER and ANZAC OVERLAP. HAVE EXTRA HOL
@@ -70,14 +69,13 @@ is_good.AUSYCalendar <- function(dates, calendar) {
       (a$doy == a$em | a$doy == a$em - 3) |
       # http://www.legislation.nsw.gov.au/maintop/view/inforce/act+115+2010+cd+0+N
       # Queens Birthday
-      (a$dom > 7 & a$dom <= 14 & a$dow == 'Mon' & a$m == 6) |
+      (a$dom > 7 & a$dom <= 14 & a$dow == 1 & a$m == 6) |
       # Labour Day
-      (a$dom <= 7 & a$dow == 'Mon' & a$m == 10) |
+      (a$dom <= 7 & a$dow == 1 & a$m == 10) |
       # Banker holiday
-      (a$dom <= 7 & a$dow == 'Mon' & a$m == 8) |
+      (a$dom <= 7 & a$dow == 1 & a$m == 8) |
       # Boxing Day. Substitute generally given
-      ((a$dom == 26 | (a$dom == 28 & (a$dow == 'Mon'|
-          strtrim(a$dow, 3) == 'Tue'))) & a$m == 12))
+      ((a$dom == 26 | (a$dom == 28 & (a$dow == 1| a$dow == 2))) & a$m == 12))
 }
 
 #' @export
@@ -88,16 +86,16 @@ is_good.AUMECalendar <- function(dates, calendar) {
   # Weekend
   !(a$wd == 1 | a$wd == 7 |
       # New Years. Next weekday a  holiday if NY falls on W/E.
-      ((a$dom == 1 | ((a$dom == 2 | a$dom == 3) & a$dow == 'Mon')) &
+      ((a$dom == 1 | ((a$dom == 2 | a$dom == 3) & a$dow == 1)) &
           a$m == 1) |
       # Australia Day. Next weekday a holiday if Aus Day falls on W/E.
-      (((a$dom == 26 | ((a$dom == 27 | a$dom == 28) & a$dow == 'Mon'))) &
+      (((a$dom == 26 | ((a$dom == 27 | a$dom == 28) & a$dow == 1))) &
           a$m == 1) |
       # ANZAC day. Substitute not legislated, but generally given
-      ((a$dom == 25 | ((a$dom == 26 | a$dom == 27) & a$dow == 'Mon')) &
+      ((a$dom == 25 | ((a$dom == 26 | a$dom == 27) & a$dow == 1)) &
           a$m == 4) |
       # Christmas. Substitute generally given
-      ((a$dom == 25 | (a$dom == 27 & (a$dow == 'Mon' | strtrim(a$dow, 3) == 'Tue'))) &
+      ((a$dom == 25 | (a$dom == 27 & (a$dow == 1 | a$dow == 2))) &
           a$m == 12) |
       # Easter holidays
       #### TODO:
@@ -106,14 +104,14 @@ is_good.AUMECalendar <- function(dates, calendar) {
       (a$doy == a$em | a$doy == a$em - 3) |
       # http://www.legislation.nsw.gov.au/maintop/view/inforce/act+115+2010+cd+0+N
       # Queens Birthday
-      (a$dom > 7 & a$dom <= 14 & a$dow == 'Mon' & a$m == 6) |
+      (a$dom > 7 & a$dom <= 14 & a$dow == 1 & a$m == 6) |
       # Labour Day
-      (a$dom > 7 & a$dom <= 14 & a$dow == 'Mon' & a$m == 3) |
+      (a$dom > 7 & a$dom <= 14 & a$dow == 1 & a$m == 3) |
       # Melb cup day
-      (a$dom <= 7 & strtrim(a$dow, 3) == 'Tue' & a$m == 11) |
+      (a$dom <= 7 & a$dow == 2 & a$m == 11) |
       # Boxing Day. Substitute generally given
-      ((a$dom == 26 | (a$dom == 28 & (a$dow == 'Mon'|
-          strtrim(a$dow, 3) == 'Tue'))) & a$m == 12))
+      ((a$dom == 26 | (a$dom == 28 & (a$dow == 1|
+          a$dow == 2))) & a$m == 12))
 }
 
 #' @export
@@ -176,22 +174,22 @@ is_good.GBLOCalendar <- function(dates, calendar) {
   # http://www.legislation.gov.uk/ukpga/1971/80
   !(a$wd == 1 | a$wd == 7 | # Weekend
       # NY
-      (a$dom == 1 | ((a$dom == 2 | a$dom == 3) & a$dow == 'Mon')) & a$m == 1 |
+      (a$dom == 1 | ((a$dom == 2 | a$dom == 3) & a$dow == 1)) & a$m == 1 |
       # Easter
       a$doy == a$em | a$doy == a$em - 3 |
       #### Bank day
       # May Day bank holiday. First Mon of May. 2002/2012 spring hol moved 4 Jun.
-      ((a$dom <= 7 & a$m == 5 & a$dow == 'Mon' & a$y >= 1978 &
+      ((a$dom <= 7 & a$m == 5 & a$dow == 1 & a$y >= 1978 &
           (a$y != 2002 | a$y != 2012)) |
           (a$dom == 4 & a$m == 6 & (a$y == 2002 | a$y == 2012)) |
           # Spring bank hol. Last Mon of May (excl. 2002, 2012)
-          (a$dom > 24 & a$m == 5 & a$dow == 'Mon' &
+          (a$dom > 24 & a$m == 5 & a$dow == 1 &
               (a$y >= 1971 & a$y != 2002 & a$y != 2012)) |
           # Spring bank holiday pushed back to 4 June for Queen's Golden and Diamond
           # Jubilee
           (a$dom == 4 & a$m == 6 & (a$y == 2002 | a$y == 2012)) |
           # Late summer bank hol. Last Mon of Aug.
-          (a$dom > 24 & a$m == 8 & a$dow == 'Mon' & a$y >= 1971)) |
+          (a$dom > 24 & a$m == 8 & a$dow == 1 & a$y >= 1971)) |
       ####
       # Queen's Jubilee
       a$dom == 5 & a$m == 6 & a$y == 2012 |
@@ -199,8 +197,8 @@ is_good.GBLOCalendar <- function(dates, calendar) {
       a$dom == 25 & a$m == 12 |
       # Boxing Day. 26th December, if not a Sun.
       # 27th December in a year in which 25th or 26th December is a Sunday
-      ((a$dom == 26 | (a$dom == 27 & (a$dow == 'Mon' |
-          strtrim(a$dow, 3) == 'Tue'))) & a$m == 12) |
+      ((a$dom == 26 | (a$dom == 27 & (a$dow == 1 |
+          a$dow == 2))) & a$m == 12) |
       # Royal Wedding
       a$dom == 29 & a$m == 4 & a$y == 2011)
 }
@@ -225,7 +223,7 @@ is_good.HKHKCalendar <- function(dates, calendar) {
   chung_yeung <- start_9th_lunar_month + lubridate::days(8)
   !(a$wd == 1 | a$wd == 7 | # Weekend
       # NY
-      a$m == 1 & (a$dom == 1 | (a$dom == 2 & a$dow == "Mon")) |
+      a$m == 1 & (a$dom == 1 | (a$dom == 2 & a$dow == 1)) |
       # Chinese lunar new year
       a$doy %in% cny |
       a$doy %in% (cny + 1) |
@@ -236,32 +234,32 @@ is_good.HKHKCalendar <- function(dates, calendar) {
       a$doy == a$em | a$doy == a$em - 3 |
       # Labour day
       # Only roll if holiday falls on Sunday (not Saturday)
-      a$m == 5 & (a$dom == 1 | ((a$dom == 2) & a$dow == "Mon")) |
+      a$m == 5 & (a$dom == 1 | ((a$dom == 2) & a$dow == 1)) |
       # Buddha day
       (a$m == lubridate::month(buddhas_bd) &
           (a$dom == lubridate::mday(buddhas_bd) |
-              (a$dom == lubridate::mday(buddhas_bd) + 1 & a$dow == "Mon"))) |
+              (a$dom == lubridate::mday(buddhas_bd) + 1 & a$dow == 1))) |
       # Dragon boat day
       (a$m == lubridate::month(dragon_boat_day) &
           (a$dom == lubridate::mday(dragon_boat_day) |
-              (a$dom == lubridate::mday(dragon_boat_day) + 1 & a$dow == "Mon"))) |
+              (a$dom == lubridate::mday(dragon_boat_day) + 1 & a$dow == 1))) |
       # Establishment day
-      a$m == 7 & (a$dom == 1 | (a$dom == 2 & a$dow == "Mon")) |
+      a$m == 7 & (a$dom == 1 | (a$dom == 2 & a$dow == 1)) |
       # Mid autumnal day
       (a$m == lubridate::month(mid_autumnal_day) &
           (a$dom == lubridate::mday(mid_autumnal_day) |
-              (a$dom == lubridate::mday(mid_autumnal_day) + 1 & a$dow == "Mon"))) |
+              (a$dom == lubridate::mday(mid_autumnal_day) + 1 & a$dow == 1))) |
       # National day
-      a$m == 10 & (a$dom == 1 | (a$dom == 2 & a$dow == "Mon")) |
+      a$m == 10 & (a$dom == 1 | (a$dom == 2 & a$dow == 1)) |
       # Chung Yeung Festival
       (a$m == lubridate::month(chung_yeung) &
           (a$dom == lubridate::mday(chung_yeung) |
-              (a$dom == lubridate::mday(chung_yeung) + 1 & a$dow == "Mon")))|
+              (a$dom == lubridate::mday(chung_yeung) + 1 & a$dow == 1)))|
       # Christmas
-      ((a$dom == 25 | (a$dom == 27 & (a$dow == 'Mon' | strtrim(a$dow, 3) == 'Tue'))) &
+      ((a$dom == 25 | (a$dom == 27 & (a$dow == 1 | a$dow == 2))) &
           a$m == 12) |
       # Boxing day
-      ((a$dom == 26 | (a$dom == 28 & (a$dow == 'Mon'| strtrim(a$dow, 3) == 'Tue'))) &
+      ((a$dom == 26 | (a$dom == 28 & (a$dow == 1| a$dow == 2))) &
           a$m == 12))
 }
 
@@ -276,42 +274,42 @@ is_good.JPTOCalendar <- function(dates, calendar) {
       (a$dom == 1 | a$dom == 2 | a$dom == 3) & a$m == 1 |
       # Coming of Age Day. 2nd Mon of Jan
       # Happy Monday starts
-      (((a$dom > 7 & a$dom <= 14) & a$m == 1 & a$y >= 2000 & a$dow == 'Mon') |
+      (((a$dom > 7 & a$dom <= 14) & a$m == 1 & a$y >= 2000 & a$dow == 1) |
           # Before start of Happy Monday
-          ((a$dom == 15 | (a$dom == 16 & a$dow == 'Mon')) &
+          ((a$dom == 15 | (a$dom == 16 & a$dow == 1)) &
               a$m == 1 & a$y < 2000)) |
       # Foundation day
-      (a$dom == 11 | (a$dom == 12 & a$dow == 'Mon')) & a$m == 2 |
+      (a$dom == 11 | (a$dom == 12 & a$dow == 1)) & a$m == 2 |
       # Vernal Equinox Day (spring)
-      ((a$doy == a$ve | (a$doy == a$ve + 1 & a$dow == 'Mon')) & a$m == 3) |
+      ((a$doy == a$ve | (a$doy == a$ve + 1 & a$dow == 1)) & a$m == 3) |
       # Autumnal equinox day
-      ((a$doy == a$ae | (a$doy == a$ae + 1 & a$dow == 'Mon')) & a$m == 9) |
+      ((a$doy == a$ae | (a$doy == a$ae + 1 & a$dow == 1)) & a$m == 9) |
       # Showa day
-      (a$dom == 29 | (a$dom == 30 & a$dow == 'Mon')) & a$m == 4 |
+      (a$dom == 29 | (a$dom == 30 & a$dow == 1)) & a$m == 4 |
       # May days
       # Constitution day, Greenery day, Children's day
       (((a$dom == 3 | a$dom == 4 | a$dom == 5) & a$m == 5) |
-          (a$dom == 6 & (a$dow == 'Mon' | strtrim(a$dow, 3) == 'Tue' |
-              a$dow == 'Wed') & a$m == 5)) |
+          (a$dom == 6 & (a$dow == 1 | a$dow == 2 |
+              a$dow == 3) & a$m == 5)) |
       # Marine day
-      (((a$dom > 14 & a$dom <= 21) & a$dow == 'Mon' & a$m == 7 & a$y >= 2003) |
-          ((a$dom == 20 | (a$dom == 21 & a$dow == 'Mon')) & a$m == 7 & a$y < 2003)) |
+      (((a$dom > 14 & a$dom <= 21) & a$dow == 1 & a$m == 7 & a$y >= 2003) |
+          ((a$dom == 20 | (a$dom == 21 & a$dow == 1)) & a$m == 7 & a$y < 2003)) |
       # Respect day
-      (((a$dom > 14 & a$dom <= 21) & a$dow == 'Mon' & a$m == 9 & a$y >= 2003) |
-          ((a$dom == 15 | (a$dom == 16 & a$dow == 'Mon')) & a$m == 9 & a$y < 2003)) |
+      (((a$dom > 14 & a$dom <= 21) & a$dow == 1 & a$m == 9 & a$y >= 2003) |
+          ((a$dom == 15 | (a$dom == 16 & a$dow == 1)) & a$m == 9 & a$y < 2003)) |
       # Citizens day
       (a$dom + 1 == a$ae & a$dom > 15 & a$dom <= 22 &
-          strtrim(a$dow, 3) == 'Tue' & a$m == 9 & a$y >= 2003) |
+          a$dow == 2 & a$m == 9 & a$y >= 2003) |
       # Health day
-      (((a$dom > 7 & a$dom <= 14) & a$dow == 'Mon' & a$m == 10 & a$y >= 2000) |
-          ((a$dom == 10 | (a$dom == 11 & a$dow == 'Mon')) &
+      (((a$dom > 7 & a$dom <= 14) & a$dow == 1 & a$m == 10 & a$y >= 2000) |
+          ((a$dom == 10 | (a$dom == 11 & a$dow == 1)) &
               a$m == 10 & a$y < 2000)) |
       # Culture day
-      (a$dom == 3 | (a$dom == 4 & a$dow == 'Mon')) & a$m == 11 |
+      (a$dom == 3 | (a$dom == 4 & a$dow == 1)) & a$m == 11 |
       # Labour day
-      (a$dom == 23 | (a$dom == 24 & a$dow == 'Mon')) & a$m == 11 |
+      (a$dom == 23 | (a$dom == 24 & a$dow == 1)) & a$m == 11 |
       # Emperors day
-      (a$dom == 23 | (a$dom == 24 & a$dow == 'Mon')) & a$m == 12 |
+      (a$dom == 23 | (a$dom == 24 & a$dow == 1)) & a$m == 12 |
       # Bank day
       # http://www.boj.or.jp/en/about/outline/holi.htm/
       a$dom == 31 & a$m == 12)
@@ -344,30 +342,30 @@ is_good.NZAUCalendar <- function(dates, calendar) {
   a <- extract_atoms(dates, calendar)
   !(a$wd == 1 | a$wd == 7 | # Weekends
       # NY
-      ((((a$dom == 1 | (a$dom == 3 & (a$dow == 'Mon' |
-          strtrim(a$dow, 3) == 'Tue')))) | ((a$dom == 2 |
-              (a$dom == 4 & (a$dow == 'Mon' | strtrim(a$dow, 3) == 'Tue'))))) &
+      ((((a$dom == 1 | (a$dom == 3 & (a$dow == 1 |
+          a$dow == 2)))) | ((a$dom == 2 |
+              (a$dom == 4 & (a$dow == 1 | a$dow == 2))))) &
           a$m == 1)   |
       # Waitangi day
-      ((a$dom == 6 | ((a$dom == 7 | a$dom == 8) & a$dow == 'Mon' & a$y > 2013)) &
+      ((a$dom == 6 | ((a$dom == 7 | a$dom == 8) & a$dow == 1 & a$y > 2013)) &
           a$m == 2) |
       # ANZAC day
-      ((a$dom == 25 | ((a$dom == 26 | a$dom == 27) & a$dow == 'Mon' & a$y > 2013))
+      ((a$dom == 25 | ((a$dom == 26 | a$dom == 27) & a$dow == 1 & a$y > 2013))
         & a$m == 4) |
       # Queens birthday
-      a$dom <= 7 & a$dow == 'Mon' & a$m == 6 |
+      a$dom <= 7 & a$dow == 1 & a$m == 6 |
       # Labour day
-      a$dom > 21 & a$dom <= 28 & a$dow == 'Mon' & a$m == 10 |
+      a$dom > 21 & a$dom <= 28 & a$dow == 1 & a$m == 10 |
       # Christmas
-      ((a$dom == 25 | (a$dom == 27 & (a$dow == 'Mon' |
-          strtrim(a$dow, 3) == 'Tue'))) & a$m == 12) |
+      ((a$dom == 25 | (a$dom == 27 & (a$dow == 1 |
+          a$dow == 2))) & a$m == 12) |
       # Boxing day
-      ((a$dom == 26 | (a$dom == 28 & (a$dow == 'Mon'|
-          strtrim(a$dow, 3) == 'Tue'))) & a$m == 12) |
+      ((a$dom == 26 | (a$dom == 28 & (a$dow == 1|
+          a$dow == 2))) & a$m == 12) |
       # Easter
       a$doy == a$em | a$doy == a$em - 3 |
       # Auckland day
-      ((a$dom >= 26 & a$m == 1) | (a$dom <= 1 & a$m == 2)) & a$dow == 'Mon')
+      ((a$dom >= 26 & a$m == 1) | (a$dom <= 1 & a$m == 2)) & a$dow == 1)
 }
 
 #' @export
@@ -375,30 +373,30 @@ is_good.NZWECalendar <- function(dates, calendar) {
   a <- extract_atoms(dates, calendar)
   !(a$wd == 1 | a$wd == 7 | # Weekends
       # NY
-      ((((a$dom == 1 | (a$dom == 3 & (a$dow == 'Mon' |
-          strtrim(a$dow, 3) == 'Tue')))) |
-          ((a$dom == 2 | (a$dom == 4 & (a$dow == 'Mon' |
-              strtrim(a$dow, 3) == 'Tue'))))) & a$m == 1)   |
+      ((((a$dom == 1 | (a$dom == 3 & (a$dow == 1 |
+          a$dow == 2)))) |
+          ((a$dom == 2 | (a$dom == 4 & (a$dow == 1 |
+              a$dow == 2))))) & a$m == 1)   |
       # Waitangi day
-      ((a$dom == 6 | ((a$dom == 7 | a$dom == 8) & a$dow == 'Mon' & a$y > 2013)) &
+      ((a$dom == 6 | ((a$dom == 7 | a$dom == 8) & a$dow == 1 & a$y > 2013)) &
           a$m == 2) |
       # ANZAC day
-      ((a$dom == 25 | ((a$dom == 26 | a$dom == 27) & a$dow == 'Mon' & a$y > 2013))
+      ((a$dom == 25 | ((a$dom == 26 | a$dom == 27) & a$dow == 1 & a$y > 2013))
         & a$m == 4) |
       # Queens birthday
-      a$dom <= 7 & a$dow == 'Mon' & a$m == 6 |
+      a$dom <= 7 & a$dow == 1 & a$m == 6 |
       # Labour day
-      a$dom > 21 & a$dom <= 28 & a$dow == 'Mon' & a$m == 10 |
+      a$dom > 21 & a$dom <= 28 & a$dow == 1 & a$m == 10 |
       # Christmas
-      ((a$dom == 25 | (a$dom == 27 & (a$dow == 'Mon' |
-          strtrim(a$dow, 3) == 'Tue'))) & a$m == 12) |
+      ((a$dom == 25 | (a$dom == 27 & (a$dow == 1 |
+          a$dow == 2))) & a$m == 12) |
       # Boxing day
-      ((a$dom == 26 | (a$dom == 28 & (a$dow == 'Mon'|
-          strtrim(a$dow, 3) == 'Tue'))) & a$m == 12) |
+      ((a$dom == 26 | (a$dom == 28 & (a$dow == 1|
+          a$dow == 2))) & a$m == 12) |
       # Easter
       a$doy == a$em | a$doy == a$em - 3 |
       # Wellington day
-      (a$dom >= 19 & a$dom <= 25) & a$dow == 'Mon' & a$m == 1)
+      (a$dom >= 19 & a$dom <= 25) & a$dow == 1 & a$m == 1)
 }
 
 
@@ -408,27 +406,27 @@ is_good.USNYCalendar <- function(dates, calendar) {
   # http://en.wikipedia.org/wiki/New_York_State_government_holidays
   !(a$wd == 1 | a$wd == 7 | # Weekends
       # New Years. Sub Mon if on Sunday, and Fri if on Saturday
-      ((a$dom == 1 & a$m == 1) | (a$dom == 31 & a$m == 12 & a$dow == 'Fri') |
-          (a$dom == 2 & a$m == 1 & a$dow == 'Mon'))|
+      ((a$dom == 1 & a$m == 1) | (a$dom == 31 & a$m == 12 & a$dow == 5) |
+          (a$dom == 2 & a$m == 1 & a$dow == 1))|
       # MLK day, Washington's birthday. 3rd Mon of Jan, Feb (resp.)
-      a$dom > 14 & a$dom <= 21 & a$dow == 'Mon' & (a$m == 1 | a$m == 2) |
+      a$dom > 14 & a$dom <= 21 & a$dow == 1 & (a$m == 1 | a$m == 2) |
       # Memorial day. Last Mon of May
-      a$dom > 24 & a$dow == 'Mon' & a$m == 5 |
+      a$dom > 24 & a$dow == 1 & a$m == 5 |
       # Independence Day. 4 Jul.  Sub Mon if on Sunday, and Fri if on Saturday
-      ((a$dom == 4 | (a$dom == 5 & a$dow == 'Mon') |
-          (a$dom == 3 & a$dom == 'Fri')) & a$m == 7) |
+      ((a$dom == 4 | (a$dom == 5 & a$dow == 1) |
+          (a$dom == 3 & a$dom == 5)) & a$m == 7) |
       # Labour day. 1st Mon of Sep.
-      a$dom <= 7 & a$dow == 'Mon' & a$m == 9 |
+      a$dom <= 7 & a$dow == 1 & a$m == 9 |
       # Columbus day. 2nd Mon of Oct.
-      a$dom > 7 & a$dom <= 14 & a$dow == 'Mon' & a$m == 10 |
+      a$dom > 7 & a$dom <= 14 & a$dow == 1 & a$m == 10 |
       # Veteran's day. 11 Nov.  Sub Mon if on Sunday, and Fri if on Saturday
-      ((a$dom == 11 | (a$dom == 12 & a$dow == 'Mon') |
-          (a$dom == 10 & a$dow == 'Fri')) & a$m == 11 )|
+      ((a$dom == 11 | (a$dom == 12 & a$dow == 1) |
+          (a$dom == 10 & a$dow == 5)) & a$m == 11 )|
       # Thanksgiving. 4th Thurs of Nov
-      a$dom > 21 & a$dom <= 28 & strtrim(a$dow, 3) == 'Thu' & a$m == 11 |
+      a$dom > 21 & a$dom <= 28 & strtrim(a$dow, 3) == 4 & a$m == 11 |
       # Christmas. Sub Mon if on Sunday, and Fri if on Saturday
-      ((a$dom == 25 | (a$dom == 26 & a$dow == 'Mon') |
-          (a$dom == 24 & a$dow == 'Fri')) & a$m == 12))
+      ((a$dom == 25 | (a$dom == 26 & a$dow == 1) |
+          (a$dom == 24 & a$dow == 5)) & a$m == 12))
 }
 
 #' @export
@@ -569,7 +567,7 @@ is.JointCalendar <- function(x) inherits(x, "JointCalendar")
 
 extract_atoms <- function (dates, calendar) {
   list(
-    dow = lubridate::wday(dates, TRUE, TRUE),
+    dow = lubridate::wday(dates, week_start = 1),
     dom = lubridate::mday(dates),
     doy = lubridate::yday(dates),
     y   = lubridate::year(dates),
