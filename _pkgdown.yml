@@ -10,13 +10,16 @@ reference:
     contents:
       - year_frac
       - is_valid_day_basis
-  - title: "Calendars and methods"
-    desc: "Supported calendar classes and methods"
+  - title: "Calendars"
+    desc: "Supported calendar classes"
     contents:
       - ends_with("Calendar")
       - locale
       - tz
       - is_good
+  - title: "Date adjustments"
+    desc: "Adjusting dates to good days and shifting dates"
+    contents:
       - adjust
       - shift
       - is_valid_bdc
@@ -24,7 +27,7 @@ reference:
     desc: "Generate schedule of dates"
     contents:
       - generate_schedule
-  - title: "Miscellaneous"
+  - title: "Other"
     desc: "Other assorted exported functions"
     contents:
       - eom
