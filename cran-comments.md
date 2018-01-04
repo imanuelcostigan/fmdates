@@ -1,6 +1,6 @@
 ## Summary
 
-* Minor change to ensure compatibility with `lubridate`
+* Fixed URL error in README
 
 ## Test environments
 
