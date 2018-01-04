@@ -1,6 +1,7 @@
-Changes in version 0.1.3-99
+Changes in version 0.1.4
 
 - `is_good()` no longer relies on `lubridate::wday()` abbreviations (#9)
+- Package website is now available. See the DESCRIPTION file for URL (#11)
 - Added specific developer documentation to `CONTRIBUTING.md` (#12)
 
 Changes in version 0.1.3
