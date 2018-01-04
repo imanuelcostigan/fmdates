@@ -3,7 +3,7 @@
 This will provide you with contribution guidelines. You can contribute in two ways:
 
 1. Raising a bug report or making a feature request in an issue
-2. Suggesting a change by submitting a pull request
+2. Suggesting a change by submitting a pull request. Specific suggestions are described below.
 
 ### Issues
 
