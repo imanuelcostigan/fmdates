@@ -77,4 +77,4 @@ year_frac(ymd("2010-02-28"), ymd("2012-03-31"), "act/365")
 #> [1] 2.087671
 ```
 
-More details can be found in the associated help files and the vignette (`vignette("dates", "fmdates")`). If you would like to contribute to the package please see the `CONTRIBUTING.md` file for general as well as specific suggestions.
+More details can be found in the associated help files and the vignette (`vignette("dates", "fmdates")`). If you would like to contribute to the package please see the [`CONTRIBUTING.md`](https://github.com/imanuelcostigan/fmdates/blob/master/CONTRIBUTING.md) file for general as well as specific suggestions.
