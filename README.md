@@ -18,12 +18,7 @@ Calendars
 You can determine whether dates are business days in a specific locale or specific locales:
 
 ``` r
-library("lubridate")
-#> 
-#> Attaching package: 'lubridate'
-#> The following object is masked from 'package:base':
-#> 
-#>     date
+library("lubridate", warn.conflicts = FALSE)
 library("fmdates")
 ausy <- AUSYCalendar()
 aume <- AUMECalendar()

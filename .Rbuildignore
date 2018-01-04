@@ -10,3 +10,4 @@
 ^CONTRIBUTING\.md$
 ^cran-comments\.md$
 ^revdep/$
+^_pkgdown\.yml$
