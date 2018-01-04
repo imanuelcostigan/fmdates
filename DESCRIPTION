@@ -1,5 +1,5 @@
-Package: fmdates
 Type: Package
+Package: fmdates
 Title: Financial Market Date Calculations
 Version: 0.1.3-99
 Author: Imanuel Costigan <i.costigan@me.com>
@@ -11,20 +11,20 @@ Description: Implements common date calculations relevant for specifying
   days in certain locales, functions to adjust and shift dates and time length
   (or day counter) calculations.
 License: GPL-2
-Encoding: UTF-8
-LazyData: true
-Imports:
-  lubridate (>= 1.7.0),
-  assertthat,
-  methods,
-  utils
-Suggests:
-  testthat,
-  knitr,
-  rmarkdown,
-  covr
-RoxygenNote: 6.0.1
-Roxygen: list(markdown = TRUE)
-VignetteBuilder: knitr
 URL: https://github.com/imanuelcostigan/fmdates
 BugReports: https://github.com/imanuelcostigan/fmdates/issues
+Imports: 
+  assertthat,
+  lubridate (>= 1.7.0),
+  methods,
+  utils
+Suggests: 
+  covr,
+  knitr,
+  rmarkdown,
+  testthat
+VignetteBuilder: knitr
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 6.0.1
