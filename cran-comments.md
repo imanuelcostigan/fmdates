@@ -1,6 +1,6 @@
 ## Summary
 
-* Minor change to ensure compatibility with upcoming release of `lubridate`
+* Minor change to ensure compatibility with `lubridate`
 
 ## Test environments
 
