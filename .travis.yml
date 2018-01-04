@@ -17,4 +17,4 @@ matrix:
       r: devel
     - os: osx
       r: release
-      osx_image: xcode8.2
+      osx_image: xcode8.3
