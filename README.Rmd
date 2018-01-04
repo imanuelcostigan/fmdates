@@ -28,7 +28,7 @@ This package implements calendars used to define locale specific business days, 
 You can determine whether dates are business days in a specific locale or specific locales:
 
 ```{r is_good}
-library("lubridate")
+library("lubridate", warn.conflicts = FALSE)
 library("fmdates")
 ausy <- AUSYCalendar()
 aume <- AUMECalendar()

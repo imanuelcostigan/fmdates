@@ -1,0 +1,33 @@
+url: http://imanuelcostigan.github.io/fmdates
+
+template:
+  params:
+    bootswatch: simplex
+
+reference:
+  - title: "Day basis"
+    desc: "Calculating lengths of time"
+    contents:
+      - year_frac
+      - is_valid_day_basis
+  - title: "Calendars and methods"
+    desc: "Supported calendar classes and methods"
+    contents:
+      - ends_with("Calendar")
+      - locale
+      - tz
+      - is_good
+      - adjust
+      - shift
+      - is_valid_bdc
+  - title: "Schedules"
+    desc: "Generate schedule of dates"
+    contents:
+      - generate_schedule
+  - title: "Miscellaneous"
+    desc: "Other assorted exported functions"
+    contents:
+      - eom
+      - is_eom
+    exclude:
+      - fmdates
