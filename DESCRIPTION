@@ -11,7 +11,7 @@ Description: Implements common date calculations relevant for specifying
   days in certain locales, functions to adjust and shift dates and time length
   (or day counter) calculations.
 License: GPL-2
-URL: https://github.com/imanuelcostigan/fmdates
+URL: https://github.com/imanuelcostigan/fmdates, https://imanuelcostigan.github.io/fmdates/
 BugReports: https://github.com/imanuelcostigan/fmdates/issues
 Imports: 
   assertthat,
