@@ -8,7 +8,7 @@ jobs:
     runs-on: macOS-latest
     steps:
       - uses: actions/checkout@v1
-      - uses: r-lib/actions/setup-pandoc@v1
+      - uses: r-lib/actions/setup-pandoc@master
         with:
           pandoc-version: '2.7.3' # The R version to download (if necessary) and use
       - uses: r-lib/actions/setup-r@master
