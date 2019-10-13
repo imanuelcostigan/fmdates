@@ -12,4 +12,4 @@ jobs:
       - name: Install dependencies
         run: Rscript -e 'install.packages("remotes")' -e 'remotes::install_deps(dependencies = TRUE)'
       - name: Check
-        run: Rscript -e 'install.packages("rcmdcheck")' -e "rcmdcheck::rcmdcheck(manual = FALSE, error_on='error')"
+        run: Rscript -e 'install.packages("rcmdcheck")' -e 'rcmdcheck::rcmdcheck(build_args = c("--no-manual", "--as-cran")'
