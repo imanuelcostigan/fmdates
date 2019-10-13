@@ -21,9 +21,6 @@ jobs:
   windows-checks:
     name: Windows Checks
     runs-on: windows-latest
-    strategy:
-      matrix: 
-        r: ['3.5', '3.6', 'devel']
     steps:
       - uses: actions/checkout@v1
       - name: Install pandoc
@@ -32,8 +29,6 @@ jobs:
           pandoc-version: '2.7.3'
       - name: Install R
         uses: r-lib/actions/setup-r@master
-        with:
-          r-version: ${{ matrix.r }}
       - name: Install dependencies
         run: Rscript -e "install.packages('remotes')" -e "remotes::install_deps(dependencies = TRUE)"
       - name: Check
