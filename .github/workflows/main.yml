@@ -6,14 +6,9 @@ jobs:
   macOS-checks:
     name: macOS Checks
     runs-on: macOS-latest
-    strategy:
-      matrix:
-        r: ['3.6', '3.5', 'devel']
     steps:
       - uses: actions/checkout@v1
       - uses: r-lib/actions/setup-r@master
-        with:
-          r-version: ${{ matrix.r }} 
       - name: Install dependencies
         run: Rscript -e 'install.packages("remotes")' -e 'remotes::install_deps(dependencies = TRUE)'
       - name: Check
