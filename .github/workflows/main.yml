@@ -56,7 +56,7 @@ jobs:
         run: Rscript -e 'install.packages("remotes")' -e 'remotes::install_deps(dependencies = TRUE)'
       - name: Check
         run: Rscript -e 'install.packages("rcmdcheck")' -e 'rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"))'
-   r-devel-checks:
+  r-devel-checks:
     name: R-devel Checks
     runs-on: macOS-latest
     steps:
