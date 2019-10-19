@@ -70,7 +70,7 @@ jobs:
         with: 
           r-version: 'devel'
       - name: Set options
-        run: Rscript -e 'option(pkgType = "source")'
+        run: Rscript -e 'options(pkgType = "source")'
       - name: Install dependencies
         run: Rscript -e 'install.packages("remotes")' -e 'remotes::install_deps(dependencies = TRUE)'
       - name: Check
