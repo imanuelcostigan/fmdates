@@ -56,3 +56,20 @@ jobs:
         run: Rscript -e 'install.packages("remotes")' -e 'remotes::install_deps(dependencies = TRUE)'
       - name: Check
         run: Rscript -e 'install.packages("rcmdcheck")' -e 'rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"))'
+   r-devel-checks:
+    name: R-devel Checks
+    runs-on: macOS-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Install pandoc
+        uses: r-lib/actions/setup-pandoc@master
+        with:
+          pandoc-version: '2.7.3' # The R version to download (if necessary) and use
+      - name: Install R
+        uses: r-lib/actions/setup-r@master
+        with: 
+          r-version: 'devel'
+      - name: Install dependencies
+        run: Rscript -e 'install.packages("remotes")' -e 'remotes::install_deps(dependencies = TRUE)'
+      - name: Check
+        run: Rscript -e 'install.packages("rcmdcheck")' -e 'rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"))'
