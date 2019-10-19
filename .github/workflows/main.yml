@@ -3,9 +3,12 @@ on: [push, pull_request]
 name: Continuous integration
 
 jobs:
-  macOS-checks:
-    name: macOS Checks
-    runs-on: macOS-latest
+  R-release:
+    name: R-release Checks
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest, macOS-latest]
     steps:
       - uses: actions/checkout@v1
       - name: Install pandoc
@@ -15,30 +18,21 @@ jobs:
       - name: Install R
         uses: r-lib/actions/setup-r@master
       - name: Install dependencies
-        run: Rscript -e 'install.packages("remotes")' -e 'remotes::install_deps(dependencies = TRUE)'
+        run: >- 
+          Rscript 
+          -e 'install.packages("remotes")' 
+          -e 'remotes::install_deps(dependencies = TRUE)'
       - name: Check
-        run: Rscript -e 'install.packages("rcmdcheck")' -e 'rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"))'
-  windows-checks:
-    name: Windows Checks
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v1
-      - name: Install pandoc
-        uses: r-lib/actions/setup-pandoc@master
-        with: 
-          pandoc-version: '2.7.3'
-      - name: Install R
-        uses: r-lib/actions/setup-r@master
-      - name: Install dependencies
-        run: Rscript -e "install.packages('remotes')" -e "remotes::install_deps(dependencies = TRUE)"
-      - name: Check
-        run: Rscript -e "install.packages('rcmdcheck')" -e "rcmdcheck::rcmdcheck(args = c('--no-manual', '--as-cran'))"
-  linux-checks:
-    name: Linux checks
+        run: >- 
+          Rscript 
+          -e 'install.packages("rcmdcheck")' 
+          -e 'rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "error")'
+  R-olds:
+    name: R-old Checks
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        r: ['3.5', '3.6']
+        r: ['3.4', '3.5']
     container: rstudio/r-base:${{ matrix.r }}-xenial
     env:
       CRAN: 'https://demo.rstudiopm.com/all/__linux__/xenial/latest'
@@ -53,10 +47,16 @@ jobs:
         with:
           r-version: ${{ matrix.r }}
       - name: Install dependencies
-        run: Rscript -e 'install.packages("remotes")' -e 'remotes::install_deps(dependencies = TRUE)'
+        run: >- 
+          Rscript 
+          -e 'install.packages("remotes")' 
+          -e 'remotes::install_deps(dependencies = TRUE)'
       - name: Check
-        run: Rscript -e 'install.packages("rcmdcheck")' -e 'rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"))'
-  r-devel-checks:
+        run: >-
+          Rscript 
+          -e 'install.packages("rcmdcheck")' 
+          -e 'rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "error")'
+  R-devel:
     name: R-devel Checks
     runs-on: macOS-latest
     steps:
