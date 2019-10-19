@@ -69,9 +69,7 @@ jobs:
         uses: r-lib/actions/setup-r@master
         with: 
           r-version: 'devel'
-      - name: Set options
-        run: Rscript -e 'options(pkgType = "source")'
       - name: Install dependencies
-        run: Rscript -e 'install.packages("remotes")' -e 'remotes::install_deps(dependencies = TRUE)'
+        run: Rscript -e 'options(pkgType = "source")' -e 'install.packages("remotes")' -e 'remotes::install_deps(dependencies = TRUE)'
       - name: Check
-        run: Rscript -e 'install.packages("rcmdcheck")' -e 'rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"))'
+        run: Rscript -e 'options(pkgType = "source")' -e 'install.packages("rcmdcheck")' -e 'rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"))'
