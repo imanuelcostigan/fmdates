@@ -25,8 +25,8 @@ jobs:
       - name: Check
         run: >- 
           Rscript 
-          -e "install.packages(\"rcmdcheck\")"
-          -e "rcmdcheck::rcmdcheck(args = c(\"--no-manual\", \"--as-cran\"), error_on = \"error\")"
+          -e 'install.packages("rcmdcheck")'
+          -e 'rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "error")'
   R-olds:
     name: R-old Checks
     runs-on: ubuntu-latest
