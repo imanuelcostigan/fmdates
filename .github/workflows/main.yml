@@ -24,7 +24,7 @@ jobs:
         uses: actions/checkout@v1
       - name: Set timezone on Windows
         if: matrix.config.os == 'windows-latest'
-        run: |
+        run: | # seems to be a bug in r-lib/actions setting TZ on Windows
            tzutil /g
            tzutil /s "GMT Standard Time"
            tzutil /g
@@ -62,6 +62,7 @@ jobs:
         run: Rscript -e "rcmdcheck::rcmdcheck(args = '${{ matrix.config.args }}', error_on = 'warning', check_dir = 'check')"
       - name: Upload check results
         if: failure()
+        run: mkdir -p check
         uses: actions/upload-artifact@v1
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
