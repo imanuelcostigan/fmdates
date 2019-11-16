@@ -60,9 +60,11 @@ jobs:
         run: Rscript -e "sessioninfo::platform_info()"
       - name: Check
         run: Rscript -e "rcmdcheck::rcmdcheck(args = '${{ matrix.config.args }}', error_on = 'warning', check_dir = 'check')"
-      - name: Upload check results
+      - name: Make check directory
         if: failure()
         run: mkdir -p check
+      - name: Upload check results
+        if: failure()
         uses: actions/upload-artifact@v1
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
