@@ -1,21 +1,41 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-fmdates
-=======
 
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/fmdates)](https://cran.r-project.org/package=fmdates) [![License](https://img.shields.io/badge/license-GPL--2-blue.svg)](http://choosealicense.com/licenses/gpl-2.0/) [![Travis build status](https://travis-ci.org/imanuelcostigan/fmdates.svg?branch=master)](https://travis-ci.org/imanuelcostigan/fmdates) [![Appveyor build status](https://ci.appveyor.com/api/projects/status/i8io32eoft5rsb6n/branch/master?svg=true)](https://ci.appveyor.com/project/imanuelcostigan/fmdates/branch/master) [![Coverage Status](https://img.shields.io/codecov/c/github/imanuelcostigan/fmdates/master.svg)](https://codecov.io/github/imanuelcostigan/fmdates?branch=master)
+# fmdates
 
-Motivation
-----------
+<!-- badges: start -->
 
-Over-the-counter (OTC) derivatives comprise a significant proportion of trading activity in global financial markets. Their general contractual conventions are specified in what are known as [International Swap and Derivatives Association (ISDA) definitions](https://www.isda.org/books/). For example, FX and currency option transactions are governed by the *1998 FX and Currency Options Definitions* and swap transactions are governed by the *2006 ISDA Definitions*. They describe in meticulous detail, among other things, how the dates of certain financial events should be determined. This includes how dates are defined to be good or bad and how bad dates are to be adjusted to good dates. They also define how to determine the length of time between two dates.
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/fmdates)](https://cran.r-project.org/package=fmdates)
+[![License](https://img.shields.io/badge/license-GPL--2-blue.svg)](http://choosealicense.com/licenses/gpl-2.0/)
+[![GitHub
+Actions](https://github.com/imanuelcostigan/fmdates/workflows/R-CMD-check/badge.svg)](https://github.com/imanuelcostigan/fmdates/actions?workflow=R-CMD-check)
+[![Coverage
+Status](https://img.shields.io/codecov/c/github/imanuelcostigan/fmdates/master.svg)](https://codecov.io/github/imanuelcostigan/fmdates?branch=master)
+<!-- badges: end -->
 
-This package implements calendars used to define locale specific business days, date adjusters and shifters, schedule generators and year fraction calculations defined by these standards.
+## Motivation
 
-Calendars
----------
+Over-the-counter (OTC) derivatives comprise a significant proportion of
+trading activity in global financial markets. Their general contractual
+conventions are specified in what are known as [International Swap and
+Derivatives Association (ISDA)
+definitions](https://www.isda.org/books/). For example, FX and currency
+option transactions are governed by the *1998 FX and Currency Options
+Definitions* and swap transactions are governed by the *2006 ISDA
+Definitions*. They describe in meticulous detail, among other things,
+how the dates of certain financial events should be determined. This
+includes how dates are defined to be good or bad and how bad dates are
+to be adjusted to good dates. They also define how to determine the
+length of time between two dates.
 
-You can determine whether dates are business days in a specific locale or specific locales:
+This package implements calendars used to define locale specific
+business days, date adjusters and shifters, schedule generators and year
+fraction calculations defined by these standards.
+
+## Calendars
+
+You can determine whether dates are business days in a specific locale
+or specific locales:
 
 ``` r
 library("lubridate", warn.conflicts = FALSE)
@@ -32,10 +52,10 @@ is_good(ymd(20141104), syme)
 #> [1] TRUE
 ```
 
-Adjusters and shifters
-----------------------
+## Adjusters and shifters
 
-You can adjust (or roll) and shift dates using predefined business day conventions:
+You can adjust (or roll) and shift dates using predefined business day
+conventions:
 
 ``` r
 # Adjust using the modified following convention
@@ -50,10 +70,11 @@ shift(ymd(20120229), years(1) + months(3), 'mf', ausy, TRUE)  # 1y3m
 #> [1] "2013-05-31"
 ```
 
-Schedules
----------
+## Schedules
 
-The preceding methods are used to generate schedules of dates required to define common financial contracts events such as cash flow exchange dates:
+The preceding methods are used to generate schedules of dates required
+to define common financial contracts events such as cash flow exchange
+dates:
 
 ``` r
 generate_schedule(effective_date = ymd(20120103), termination_date = ymd(20130103), 
@@ -63,10 +84,10 @@ generate_schedule(effective_date = ymd(20120103), termination_date = ymd(2013010
 #> [3] 2012-07-03 UTC--2012-10-03 UTC 2012-10-03 UTC--2013-01-03 UTC
 ```
 
-Year fractions
---------------
+## Year fractions
 
-Time lengths then usually need to be computed for each interval of such a schedule according to some day basis convention:
+Time lengths then usually need to be computed for each interval of such
+a schedule according to some day basis convention:
 
 ``` r
 # 30/360us convention
@@ -77,4 +98,8 @@ year_frac(ymd("2010-02-28"), ymd("2012-03-31"), "act/365")
 #> [1] 2.087671
 ```
 
-More details can be found in the associated help files and the vignette (`vignette("dates", "fmdates")`). If you would like to contribute to the package please see the [`CONTRIBUTING.md`](https://github.com/imanuelcostigan/fmdates/blob/master/CONTRIBUTING.md) file for general as well as specific suggestions.
+More details can be found in the associated help files and the vignette
+(`vignette("dates", "fmdates")`). If you would like to contribute to the
+package please see the
+[`CONTRIBUTING.md`](https://github.com/imanuelcostigan/fmdates/blob/master/CONTRIBUTING.md)
+file for general as well as specific suggestions.
