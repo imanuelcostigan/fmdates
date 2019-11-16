@@ -19,12 +19,16 @@ jobs:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       CRAN: ${{ matrix.config.cran }}
     steps:
-      - uses: actions/checkout@v1
-      - uses: r-lib/actions/setup-r@v1
+      - name: Check out repo
+        uses: actions/checkout@v1
+      - name: Setup R
+        uses: r-lib/actions/setup-r@v1
         with:
           r-version: ${{ matrix.config.r }}
-      - uses: r-lib/actions/setup-pandoc@v1
-      - uses: r-lib/actions/setup-tinytex@v1
+      - name: Setup pandoc
+        uses: r-lib/actions/setup-pandoc@v1
+      - name: Setup TinyTeX
+        uses: r-lib/actions/setup-tinytex@v1
         if: contains(matrix.config.args, 'no-manual') == false
       - name: Cache R packages
         uses: actions/cache@v1
@@ -41,6 +45,8 @@ jobs:
           sudo -s eval "$sysreqs"
       - name: Install dependencies
         run: Rscript -e "install.packages('remotes')" -e "remotes::install_deps(dependencies = TRUE)" -e "remotes::install_cran('rcmdcheck')"
+      - name: R session info # sessioninfo is a reverse dep of {{rcmdcheck}}
+        run: Rscript -e "sessioninfo::session_info()"
       - name: Check
         run: Rscript -e "rcmdcheck::rcmdcheck(args = '${{ matrix.config.args }}', error_on = 'warning', check_dir = 'check')"
       - name: Upload check results
