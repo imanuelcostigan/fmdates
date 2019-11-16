@@ -18,7 +18,7 @@ jobs:
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       CRAN: ${{ matrix.config.cran }}
-      TZ: "UTC"   # seems to be a bug in r-lib/actions setting TZ on Windows  
+      TZ: "UTC"   # seems to be a bug in r-lib/actions setting TZ on Windows
     steps:
       - name: Check out repo
         uses: actions/checkout@v1
@@ -47,9 +47,7 @@ jobs:
       - name: Install dependencies
         run: Rscript -e "install.packages('remotes')" -e "remotes::install_deps(dependencies = TRUE)" -e "remotes::install_cran('rcmdcheck')"
       - name: R session info # sessioninfo is a reverse dep of {{rcmdcheck}}
-        run: |
-          Rscript -e "sessioninfo::platform_info()"
-          Rscript -e "Sys.getenv()"
+        run: Rscript -e "sessioninfo::platform_info()"
       - name: Check
         run: Rscript -e "rcmdcheck::rcmdcheck(args = '${{ matrix.config.args }}', error_on = 'warning', check_dir = 'check')"
       - name: Upload check results
