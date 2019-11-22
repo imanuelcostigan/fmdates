@@ -18,16 +18,16 @@ jobs:
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       CRAN: ${{ matrix.config.cran }}
-      # TZ: "UTC"   # seems to be a bug in r-lib/actions setting TZ on Windows
+      TZ: "UTC"   # seems to be a bug in r-lib/actions setting TZ on Windows
     steps:
       - name: Check out repo
         uses: actions/checkout@v1
-      - name: Set timezone on Windows
-        if: matrix.config.os == 'windows-latest'
-        run: | # seems to be a bug in r-lib/actions setting TZ on Windows
-           tzutil /g
-           tzutil /s "GMT Standard Time"
-           tzutil /g
+      #- name: Set timezone on Windows
+      #  if: matrix.config.os == 'windows-latest'
+      #  run: | # seems to be a bug in r-lib/actions setting TZ on Windows
+      #     tzutil /g
+      #     tzutil /s "GMT Standard Time"
+      #     tzutil /g
       - name: Setup R
         uses: r-lib/actions/setup-r@master
         with:
