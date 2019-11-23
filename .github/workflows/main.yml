@@ -48,7 +48,8 @@ jobs:
         run: |
           Rscript -e "install.packages('remotes')"
           Rscript -e "remotes::install_deps(dependencies = TRUE)"
-          Rscript -e "remotes::install_cran('rcmdcheck')"
+      - name: Install check tools
+        run: Rscript -e "remotes::install_cran('rcmdcheck')"
       - name: R session info # sessioninfo is a reverse dep of {{rcmdcheck}}
         run: Rscript -e "sessioninfo::platform_info()"
       - name: Check
