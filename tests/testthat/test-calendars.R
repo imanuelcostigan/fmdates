@@ -97,11 +97,14 @@ test_that('London calendar is correct', {
     20120605, 20120827, 20121225, 20121226)
   hol_2013 <- ymd(20130101, 20130329, 20130401, 20130506, 20130527, 20130826,
     20131225, 20131226)
+  hol_boxing_day_sub <- ymd(20201228, 20211228)
 
   # Check bad days are bad
   gblo <- GBLOCalendar()
   expect_identical(is_good(hol_2012, gblo), rep(FALSE, NROW(hol_2012)))
   expect_identical(is_good(hol_2013, gblo), rep(FALSE, NROW(hol_2013)))
+  expect_identical(is_good(hol_boxing_day_sub, gblo),
+    rep(FALSE, NROW(hol_boxing_day_sub)))
 
   # Check weekends bad
   expect_equal(is_good(ymd(20150214, 20150215),gblo), c(FALSE, FALSE))
