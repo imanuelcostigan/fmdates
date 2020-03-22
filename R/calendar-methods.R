@@ -178,21 +178,23 @@ is_good.GBLOCalendar <- function(dates, calendar) {
       # Easter
       a$doy == a$em | a$doy == a$em - 3 |
       #### Bank day
-      # May Day bank holiday. First Mon of May. 2002/2012 spring hol moved 4 Jun.
-      ((a$dom <= 7 & a$m == 5 & a$dow == 1 & a$y >= 1978 &
-          (a$y != 2002 | a$y != 2012)) |
-          (a$dom == 4 & a$m == 6 & (a$y == 2002 | a$y == 2012)) |
-          # Spring bank hol. Last Mon of May (excl. 2002, 2012)
-          (a$dom > 24 & a$m == 5 & a$dow == 1 &
-              (a$y >= 1971 & a$y != 2002 & a$y != 2012)) |
-          # Spring bank holiday pushed back to 4 June for Queen's Golden and Diamond
-          # Jubilee
-          (a$dom == 4 & a$m == 6 & (a$y == 2002 | a$y == 2012)) |
-          # Late summer bank hol. Last Mon of Aug.
-          (a$dom > 24 & a$m == 8 & a$dow == 1 & a$y >= 1971)) |
-      ####
+      # Early May Day bank holiday. First Mon of May. Except:
+      # 2020 moved to 8 May to align with VE day commemoration
+      (a$dom <= 7 & a$m == 5 & a$dow == 1 & (a$y >= 1978 & a$y != 2020)) |
+      # Early May Day moved to align to VE day in 2020
+      (a$dom == 8 & a$m == 5 & a$y >= 1978 & a$y == 2020) |
+      # Spring bank hol. Last Mon of May. Except: 2002/2012 spring hol moved
+      # forward to align to Queen's Jubilee.
+      (a$dom > 24 & a$m == 5 & a$dow == 1 &
+          (a$y >= 1971 & a$y != 2002 & a$y != 2012)) |
+      # Spring bank holiday pushed back to 4 June for Queen's Jubilee
+      (a$dom == 4 & a$m == 6 & a$y >= 1978 & (a$y == 2002 | a$y == 2012)) |
       # Queen's Jubilee
+      a$dom == 8 & a$m == 6 & a$y == 2002 |
       a$dom == 5 & a$m == 6 & a$y == 2012 |
+      # Late summer bank hol. Last Mon of Aug.
+      (a$dom > 24 & a$m == 8 & a$dow == 1 & a$y >= 1971) |
+      ####
       # Christmas. Substitute generally given
       ((a$dom == 25 | (a$dom == 27 & (a$dow == 1 | a$dow == 2))) & a$m == 12) |
       # Boxing Day. Substitute generally given
