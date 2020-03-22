@@ -1,3 +1,7 @@
+Changes in version 0.1.5
+
+- Fixed substitution logic for `GBLOCalendar()` for Boxing Day (#17)
+
 Changes in version 0.1.4
 
 - `is_good()` no longer relies on `lubridate::wday()` abbreviations (#9)

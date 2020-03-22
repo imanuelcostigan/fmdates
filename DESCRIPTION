@@ -1,7 +1,7 @@
 Type: Package
 Package: fmdates
 Title: Financial Market Date Calculations
-Version: 0.1.4
+Version: 0.1.4-99
 Authors@R: person("Imanuel", "Costigan", email = "i.costigan@me.com", 
                   role = c("aut", "cre"))
 Description: Implements common date calculations relevant for specifying

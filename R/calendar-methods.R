@@ -193,12 +193,10 @@ is_good.GBLOCalendar <- function(dates, calendar) {
       ####
       # Queen's Jubilee
       a$dom == 5 & a$m == 6 & a$y == 2012 |
-      # Christmas
-      a$dom == 25 & a$m == 12 |
-      # Boxing Day. 26th December, if not a Sun.
-      # 27th December in a year in which 25th or 26th December is a Sunday
-      ((a$dom == 26 | (a$dom == 27 & (a$dow == 1 |
-          a$dow == 2))) & a$m == 12) |
+      # Christmas. Substitute generally given
+      ((a$dom == 25 | (a$dom == 27 & (a$dow == 1 | a$dow == 2))) & a$m == 12) |
+      # Boxing Day. Substitute generally given
+      ((a$dom == 26 | (a$dom == 28 & (a$dow == 1 | a$dow == 2))) & a$m == 12) |
       # Royal Wedding
       a$dom == 29 & a$m == 4 & a$y == 2011)
 }
