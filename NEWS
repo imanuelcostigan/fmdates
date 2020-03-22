@@ -1,6 +1,10 @@
 Changes in version 0.1.5
 
-- Fixed substitution logic for `GBLOCalendar()` for Boxing Day (#17)
+For London calendar:
+
+- Early May Day bank holiday moved to align to VE Day (#14)
+- Boxing Day substitution fixed for London (#17)
+- Fixed hidden bank day bug
 
 Changes in version 0.1.4
 
